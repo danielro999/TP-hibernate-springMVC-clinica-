@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!-- Conecion -->
+		
+	<bean id="beanConexion" class="frgp.utn.edu.ar.daoImp.Conexion" scope="singleton">
+	</bean>
+	
+<!-- Medico -->
+		
+	<bean id="beanMedico" class="frgp.utn.edu.ar.entidad.Medico"
+		scope="prototype">
+	</bean>
+	
+	<bean id="beanMedicoNegocio" class="frgp.utn.edu.ar.negocioImp.MedicoNegocio"
+		scope="singleton">
+		<property name="daoMedico" ref="beanDaoMedico" />
+	</bean>
+
+	<bean id="beanDaoMedico" class="frgp.utn.edu.ar.daoImp.DaoMedico" scope="singleton">
+		<property name="conexion" ref="beanConexion"></property>
+	</bean>
+		
+					
+<!-- paciente -->
+	
+	<bean id="beanPaciente" class="frgp.utn.edu.ar.entidad.Paciente"
+		scope="prototype">
+	</bean>
+	
+	<bean id="beanPacienteNegocio" class="frgp.utn.edu.ar.negocioImp.PacienteNegocio"
+		scope="singleton">
+		<property name="daoPaciente" ref="beanDaoPaciente" />
+	</bean>
+
+	<bean id="beanDaoPaciente" class="frgp.utn.edu.ar.daoImp.DaoPaciente" scope="singleton">
+		<property name="conexion" ref="beanConexion"></property>
+	</bean>
+
+<!-- Espacialidad -->	
+
+	<bean id="beanEspecialidad" class="frgp.utn.edu.ar.entidad.Especialidad" scope="prototype">
+	<!--  <property name="id" value="0"></property>
+	<constructor-arg index="0" type="Long" value="0"></constructor-arg>
+	<constructor-arg index="1" type="String" value="Clinico"></constructor-arg>-->
+	</bean>
+	
+	 <bean id="beanDaoEspecialidad" class="frgp.utn.edu.ar.daoImp.DaoEspecialidad" scope="singleton">
+		<property name="conexion" ref="beanConexion"></property>
+	</bean>
+	
+    <bean id="beanEspecialidadNegocio" class="frgp.utn.edu.ar.negocioImp.EspecialidadNegocio" scope="singleton">
+		<property name="daoEspecialidad" ref="beanDaoEspecialidad"></property>
+	</bean>
+	
+</beans>
