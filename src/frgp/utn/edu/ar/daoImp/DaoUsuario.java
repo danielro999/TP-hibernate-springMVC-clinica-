@@ -5,43 +5,40 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-//import dao.ConfiguracionHibernate;
-import frgp.utn.edu.ar.dao.IdaoEspecialidad;
+import frgp.utn.edu.ar.dao.IdaoUsuario;
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Usuario;
 
-
-public class  DaoEspecialidad implements IdaoEspecialidad{
+public class DaoUsuario implements IdaoUsuario {
+	//variable y constructores
 	private Conexion conexion;
 	
-public DaoEspecialidad() {
-		
-	}
-	public DaoEspecialidad(Conexion conexion) {
-		this.conexion = conexion;
-	}
+	public DaoUsuario() {
+			
+		}
+		public DaoUsuario(Conexion conexion) {
+			this.conexion = conexion;
+		}
 
-	public boolean add(Especialidad especialidad) {
-	    boolean estado = true;
+	//agregar
+	public boolean add(Usuario usuario) {
+		boolean estado = true;
         Session session = null;
 
         try {
             session = conexion.abrirConexion();
             session.beginTransaction();
-
             // Guardar el objeto
-            session.save(especialidad);
-
+            session.save(usuario);
             // Forzar la sincronización de la sesión con la base de datos
             session.flush();
-
             // Confirmar la transacción
             session.getTransaction().commit();
             
             // Verificar si el objeto se agregó a la base de datos
-            Especialidad savedEspecialidad = (Especialidad) session.get(Especialidad.class, especialidad.getId());
+            Usuario savedUsuario = (Usuario) session.get(Usuario.class, usuario.getId());
 
-            if (savedEspecialidad == null) {
+            if (savedUsuario == null) {
                 estado = false;
             }
 
@@ -54,43 +51,49 @@ public DaoEspecialidad() {
         }
 
         return estado;
-    }
-	
-	public Especialidad readOne(String nombreEspecialidad) {
+		
+	}
+
+	//Traer un usuario completo
+	public Usuario readOne(String nombreUsuario) {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
        
-        String hql = "FROM Especialidad WHERE nombre = :nombre";
+        String hql = "FROM Usuario WHERE nombre = :nombreUsuario";
         Query query = session.createQuery(hql);
-        query.setParameter("nombre", nombreEspecialidad);
-
+        query.setParameter("nombre", nombreUsuario);
         // Ejecutar la consulta y obtener el resultado único
-        Especialidad especialidad = (Especialidad) query.uniqueResult();
-
-        //de profe
-        //Especialidad especialidad = (Especialidad) session.get(Especialidad.class, nombreEspecialidad);
-
-        return especialidad;
+        Usuario usuario = (Usuario) query.uniqueResult();
+        return usuario;
 	}
 
-	public List<Especialidad> readAll() {
+	//traer lista de usuraios
+	public List<Usuario> readAll() {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Especialidad> pacientes = session.createQuery("FROM Especialidad").list();
-        return pacientes;
+        List<Usuario> usuarios = session.createQuery("FROM Usuario").list();
+        return usuarios;
 	}
-	
-	public boolean exist(long id) {
+
+	//Existe o es repetido
+	public boolean exist(String nombreUsuario) {
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
-        Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
-        if(especialidad!=null)
+		 String hql = "FROM Usuario WHERE nombre = :nombreUsuario";
+	        Query query = session.createQuery(hql);
+	        query.setParameter("nombre", nombreUsuario);
+
+	        // Ejecutar la consulta y obtener el resultado único
+	        Usuario usuario = (Usuario) query.uniqueResult();
+       // Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
+        if(usuario!=null)
         	return true;
-        
+  
         return false;
 	}
-	
-	public boolean update(Especialidad especialidad) {
+
+	//modificar
+	public boolean update(Usuario usuario) {
 		boolean estado = true;
         Session session = null;
 
@@ -99,7 +102,7 @@ public DaoEspecialidad() {
             session.beginTransaction();
 
             // Guardar el objeto
-            session.update(especialidad);
+            session.update(usuario);
 
             // Forzar la sincronización de la sesión con la base de datos
             session.flush();
@@ -108,9 +111,9 @@ public DaoEspecialidad() {
             session.getTransaction().commit();
 
             // Verificar si el objeto se agregó a la base de datos
-            Especialidad savedPaciente = (Especialidad) session.get(Especialidad.class, especialidad.getId());
+            Usuario savedUsuario = (Usuario) session.get(Usuario.class, usuario.getId());
 
-            if (!savedPaciente.equals(especialidad)) {
+            if (!savedUsuario.equals(usuario)) {
                 estado = false;
             }
         } catch (Exception e) {
@@ -122,9 +125,10 @@ public DaoEspecialidad() {
         }
 
         return estado;
-    }
+	}
+
 	
-	public boolean delete(Especialidad especialidad) {
+	public boolean delete(Usuario usuario) {
 		boolean estado = true;
         Session session = null;
 
@@ -133,7 +137,7 @@ public DaoEspecialidad() {
             session.beginTransaction();
 
             // Guardar el objeto
-            session.delete(especialidad);
+            session.delete(usuario);
 
             // Forzar la sincronización de la sesión con la base de datos
             session.flush();
@@ -142,9 +146,9 @@ public DaoEspecialidad() {
             session.getTransaction().commit();
 
             // Verificar si el objeto se agregó a la base de datos
-            Especialidad savedPaciente = (Especialidad) session.get(Especialidad.class, especialidad.getId());
+            Usuario savedUsuario = (Usuario) session.get(Usuario.class, usuario.getId());
 
-            if (savedPaciente != null) {
+            if (savedUsuario != null) {
                 estado = false;
             }
         } catch (Exception e) {
@@ -168,4 +172,5 @@ public DaoEspecialidad() {
 	}
 		
 	
+
 }

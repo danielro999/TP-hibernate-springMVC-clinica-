@@ -20,22 +20,21 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    // @Column(name="id_usuario")
     private Long id;
-    
+  /*  
     @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Medico medico;
-    
+    */
     @Column(name = "nombre_usuario")
     private String nombreUsuario;
     
-	
     private String contrasenia;
 
     public Usuario() {
 	}
 
-	public Usuario(Medico medico, String nombreUsuario, String contrasenia) {
+	public Usuario(/*Medico medico,*/ String nombreUsuario, String contrasenia) {
 		super();
-		this.medico = medico;
+		/*this.medico = medico;*/
 		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
 	}
@@ -59,7 +58,7 @@ public class Usuario implements Serializable {
 	public String getContrasenia() {
 		return contrasenia;
 	}
-
+/*
 	public Medico getMedico() {
 		return medico;
 	}
@@ -67,7 +66,7 @@ public class Usuario implements Serializable {
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-
+*/
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}

@@ -1,5 +1,9 @@
 package frgp.utn.edu.ar.entidad;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
+
 
 	@Entity
 	@Table(name="MEDICOS")
@@ -27,10 +33,13 @@ import javax.persistence.CascadeType;
 		@JoinColumn(name="id_especialidad")
 		private Especialidad especialidad;
 		
-		@OneToOne(cascade= {CascadeType.ALL})
+		@OneToOne(cascade= {CascadeType.ALL}, fetch = FetchType.LAZY)
 		@JoinColumn(name="id_usuario")
 		private Usuario usuario;
 			
+		@OneToMany(cascade= {CascadeType.ALL})
+		private List<HorarioTrabajo> listaHorarioTrabajo;
+		
 		private String nombre;
 		
 		private String apellido;
@@ -52,43 +61,16 @@ import javax.persistence.CascadeType;
 		//constructor vacio
 		public Medico() {
 			super();
-		}
 		
-		public Medico(int legajo, String nombre, String apellido, String sexo, String fechaNacimiento, String direccion,
-				String localidad, String correoElectronico, String telefono) {
+		}
+	
+		public Medico(int legajo, Especialidad especialidad, Usuario usuario, String nombre, String apellido,
+				String sexo, String fechaNacimiento, String direccion, String localidad, String correoElectronico,
+				String telefono, List<HorarioTrabajo> listaHorarioTrabajo) {
 			super();
 			this.legajo = legajo;
-			this.nombre = nombre;
-			this.apellido = apellido;
-			this.sexo = sexo;
-			this.fechaNacimiento = fechaNacimiento;
-			this.direccion = direccion;
-			this.localidad = localidad;
-			this.correoElectronico = correoElectronico;
-			this.telefono = telefono;
-		}
-
-
-
-		public Medico( String nombre, String apellido, String sexo, String fechaNacimiento, String direccion,
-				String localidad, String correoElectronico, String telefono) {
-			super();
-			this.nombre = nombre;
-			this.apellido = apellido;
-			this.sexo = sexo;
-			this.fechaNacimiento = fechaNacimiento;
-			this.direccion = direccion;
-			this.localidad = localidad;
-			this.correoElectronico = correoElectronico;
-			this.telefono = telefono;
-		}
-		
-		public Medico(Usuario usuario, Especialidad especialidad, int legajo, String nombre, String apellido, String sexo,
-				String fechaNacimiento, String direccion, String localidad, String correoElectronico, String telefono) {
-			super();
-			this.usuario = usuario;
 			this.especialidad = especialidad;
-			this.legajo = legajo;
+			this.usuario = usuario;
 			this.nombre = nombre;
 			this.apellido = apellido;
 			this.sexo = sexo;
@@ -97,9 +79,8 @@ import javax.persistence.CascadeType;
 			this.localidad = localidad;
 			this.correoElectronico = correoElectronico;
 			this.telefono = telefono;
+			this.listaHorarioTrabajo = listaHorarioTrabajo;
 		}
-
-		
 
 		public Usuario getUsuario() {
 			return usuario;
@@ -188,8 +169,42 @@ import javax.persistence.CascadeType;
 		public void setTelefono(String telefono) {
 			this.telefono = telefono;
 		}
+			
+		
+		public List<HorarioTrabajo> getHorarioTrabajo() {
+			return listaHorarioTrabajo;
+		}
+
+		public void setHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
+			this.listaHorarioTrabajo = listaHorarioTrabajo;
+		}
+		
+		public void addHorario(HorarioTrabajo HorarioTrabajo) {
+			this.listaHorarioTrabajo.add(HorarioTrabajo);
+		}
+
 		//met ToString()
+		
 		@Override
+		public String toString() {
+			String mensaje = "Medico [legajo=" + legajo + ", nombre="
+					+ nombre + ", apellido=" + apellido + "]";
+			if (usuario != null) {
+				mensaje += ", usiario= " + usuario.getNombreUsuario();
+			}
+			if (especialidad != null) {
+				mensaje += ", especialidad= " + especialidad.getNombre();
+			}
+			for (HorarioTrabajo horarioTrabajo2 : this.listaHorarioTrabajo) {
+				mensaje += ", " +horarioTrabajo2;
+			}
+			
+			return mensaje;
+		}
+		
+		
+		/*
+		 * @Override
 		public String toString() {
 			String mensaje = "Medico [legajo=" + legajo + ", nombre="
 					+ nombre + ", apellido=" + apellido + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
@@ -203,6 +218,7 @@ import javax.persistence.CascadeType;
 			}
 			return mensaje;
 		}
+		*/
 
 	}
 

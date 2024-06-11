@@ -18,7 +18,7 @@ public class DaoMedico implements IdaoMedico {
         this.conexion = conexion;
     }
 
-	public boolean exist(long legajo) {
+	public boolean exist(int legajo) {
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medico medico=(Medico)session.get(Medico.class,legajo);

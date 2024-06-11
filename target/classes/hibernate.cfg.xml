@@ -17,5 +17,7 @@
         <mapping class="frgp.utn.edu.ar.entidad.Paciente"/>
         <mapping class="frgp.utn.edu.ar.entidad.Usuario"/>
         <mapping class="frgp.utn.edu.ar.entidad.Especialidad"/>
+        <mapping class="frgp.utn.edu.ar.entidad.HorarioTrabajo"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Turno"/>
     </session-factory>
 </hibernate-configuration>

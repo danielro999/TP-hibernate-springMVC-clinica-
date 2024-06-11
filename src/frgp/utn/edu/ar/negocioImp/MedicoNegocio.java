@@ -50,7 +50,7 @@ public class MedicoNegocio implements IMedicoNegocio {
 	}
 
 	
-	public boolean exist(long id) {
+	public boolean exist(int id) {
 
 		return daoMedico.exist(id);
 	}
