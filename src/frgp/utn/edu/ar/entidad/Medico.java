@@ -196,7 +196,7 @@ import javax.persistence.CascadeType;
 				mensaje += ", especialidad= " + especialidad.getNombre();
 			}
 			for (HorarioTrabajo horarioTrabajo2 : this.listaHorarioTrabajo) {
-				mensaje += ", " +horarioTrabajo2;
+				mensaje += "\n      ," +horarioTrabajo2;
 			}
 			
 			return mensaje;
