@@ -58,11 +58,11 @@ public class DaoMedico implements IdaoMedico {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
     }
-
     
 	public Medico readOne(String nombreMedico) {
 		Session session = conexion.abrirConexion();
@@ -110,11 +110,12 @@ public class DaoMedico implements IdaoMedico {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
-
         return estado;
     }
 
+    
     public boolean delete(Medico medico) {
         boolean estado = true;
         Session session = null;
@@ -155,6 +156,13 @@ public class DaoMedico implements IdaoMedico {
         List<Medico> Medico = session.createQuery("FROM Medico").list();
         return Medico;
     }
+    
+    public List<Medico> readAllActive() {
+        Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        List<Medico> Medico = session.createQuery("FROM Medico where estado=1").list();
+        return Medico;
+    }
 
     // Agrego los getters y setters para Spring Core
 
@@ -166,11 +174,5 @@ public class DaoMedico implements IdaoMedico {
         this.conexion = conexion;
     }
     
-//  public Medico readOne(Long legajo) {
-//  Session session = conexion.abrirConexion();
-//  session.beginTransaction();
-//  Medico medico = (Medico) session.get(Medico.class, legajo);
-//  return medico;
-//}
 
 }

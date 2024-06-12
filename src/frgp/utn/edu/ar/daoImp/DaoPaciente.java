@@ -59,6 +59,7 @@ public class DaoPaciente implements IdaoPaciente {
         Paciente paciente = (Paciente) session.get(Paciente.class, id);
         return paciente;
     }
+    
 
     public boolean update(Paciente paciente) {
         boolean estado = true;
@@ -134,7 +135,12 @@ public class DaoPaciente implements IdaoPaciente {
         List<Paciente> pacientes = session.createQuery("FROM Paciente").list();
         return pacientes;
     }
-
+    public List<Paciente> readAllActive() {
+        Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        List<Paciente> pacientes = session.createQuery("FROM Paciente where estado= 1").list();
+        return pacientes;
+    }
     // Agrego los getters y setters para Spring Core
 
     public Conexion getConexion() {

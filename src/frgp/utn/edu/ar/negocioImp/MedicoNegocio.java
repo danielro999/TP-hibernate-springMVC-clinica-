@@ -42,7 +42,9 @@ public class MedicoNegocio implements IMedicoNegocio {
 		//return daoUsuario.ReadOne(nombreUsuario);
 		return daoMedico.readOne(nombreMedico);
 	}
-
+    public List<Medico> readAllActive(){
+    	return daoMedico.readAllActive();
+    }
 	
 	public List<Medico> readAll() {
 		
@@ -73,4 +75,5 @@ public class MedicoNegocio implements IMedicoNegocio {
 	public void setDao(IdaoMedico dao) {
 		this.daoMedico = dao;
 	}
+
 }

@@ -41,36 +41,33 @@ import javax.persistence.CascadeType;
 		private List<HorarioTrabajo> listaHorarioTrabajo;
 		
 		private String nombre;
-		
 		private String apellido;
-		
 		private String sexo;
 		
 		@Column(name="fecha_nacimiento")
 		private String fechaNacimiento;
-		
 		private String direccion;
-		
 		private String localidad;
 		
 		@Column(name="correo_electronico")
 		private String correoElectronico;
-		
 		private String telefono;
-		
+		private boolean estado;
+
 		//constructor vacio
 		public Medico() {
 			super();
 		
 		}
 	
-		public Medico(int legajo, Especialidad especialidad, Usuario usuario, String nombre, String apellido,
-				String sexo, String fechaNacimiento, String direccion, String localidad, String correoElectronico,
-				String telefono, List<HorarioTrabajo> listaHorarioTrabajo) {
+		public Medico(int legajo, Especialidad especialidad, Usuario usuario, List<HorarioTrabajo> listaHorarioTrabajo,
+				String nombre, String apellido, String sexo, String fechaNacimiento, String direccion, String localidad,
+				String correoElectronico, String telefono, boolean estado) {
 			super();
 			this.legajo = legajo;
 			this.especialidad = especialidad;
 			this.usuario = usuario;
+			this.listaHorarioTrabajo = listaHorarioTrabajo;
 			this.nombre = nombre;
 			this.apellido = apellido;
 			this.sexo = sexo;
@@ -79,8 +76,28 @@ import javax.persistence.CascadeType;
 			this.localidad = localidad;
 			this.correoElectronico = correoElectronico;
 			this.telefono = telefono;
+			this.estado = estado;
+		}
+
+		public List<HorarioTrabajo> getListaHorarioTrabajo() {
+			return listaHorarioTrabajo;
+		}
+
+
+		public void setListaHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
 			this.listaHorarioTrabajo = listaHorarioTrabajo;
 		}
+
+
+		public boolean isEstado() {
+			return estado;
+		}
+
+
+		public void setEstado(boolean estado) {
+			this.estado = estado;
+		}
+
 
 		public Usuario getUsuario() {
 			return usuario;
@@ -188,7 +205,7 @@ import javax.persistence.CascadeType;
 		@Override
 		public String toString() {
 			String mensaje = "Medico [legajo=" + legajo + ", nombre="
-					+ nombre + ", apellido=" + apellido + "]";
+					+ nombre + ", apellido= " + apellido + ", estado= "+ estado +"]";
 			if (usuario != null) {
 				mensaje += ", usiario= " + usuario.getNombreUsuario();
 			}

@@ -13,7 +13,9 @@ import frgp.utn.edu.ar.entidad.Paciente;
 	    Paciente readOne(Long id);
 
 	    List<Paciente> readAll();
-
+	    
+	    List<Paciente> readAllActive();
+	    
 	    boolean update(Paciente paciente);
 
 	    boolean delete(Paciente paciente);

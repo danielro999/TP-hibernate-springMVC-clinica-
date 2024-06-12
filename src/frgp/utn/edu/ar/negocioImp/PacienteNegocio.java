@@ -40,6 +40,10 @@ public class PacienteNegocio implements IPacienteNegocio {
         return daoPaciente.readAll();
     }
 
+    public List<Paciente> readAllActive(){
+    	return daoPaciente.readAllActive();
+    }
+    
     public boolean update(Paciente paciente) {
         return daoPaciente.update(paciente);
     }

@@ -11,6 +11,7 @@ public interface IPacienteNegocio {
     boolean add(Paciente paciente);
     Paciente readOne(Long id);
     List<Paciente> readAll();
+    List<Paciente> readAllActive();
     boolean update(Paciente paciente);
     boolean delete(Paciente paciente);
 }

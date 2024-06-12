@@ -118,18 +118,18 @@ public class Main {
 		Usuario usuario1 = (Usuario) appContext.getBean("beanUsuario");
 		usuario1.setNombreUsuario("BELA");
 		usuario1.setContrasenia("elmasgrande");
-/*		usuario1.setMedico(null);
-*/
+		usuario1.setEstado(true);
+
 		Usuario usuario2 = (Usuario) appContext.getBean("beanUsuario");
 		usuario2.setNombreUsuario("Tapia");
 		usuario2.setContrasenia("nro1-2024");
-/*		usuario2.setMedico(null);
-*/
+		usuario2.setEstado(true);
+
 		Usuario usuario3 = (Usuario) appContext.getBean("beanUsuario");
 		usuario3.setNombreUsuario("JuanMartin");
 		usuario3.setContrasenia("zurdoGenio");
-/*		usuario3.setMedico(medico1);
-*/
+		usuario3.setEstado(true);
+
 		// agregar a la base llamar bean
 		UsuarioNegocio usuarioNegocio = (UsuarioNegocio) appContext.getBean("beanUsuarioNegocio");
 
@@ -165,6 +165,7 @@ public class Main {
 		medico1.setEspecialidad(especialidad4);
 		medico1.addHorario(horarioMedico1);
 		medico1.setUsuario(usuario3);
+		medico1.setEstado(true);
 		
 		Medico medico2 = (Medico) appContext.getBean("beanMedico");
 		medico2.setApellido("chavez");
@@ -176,7 +177,8 @@ public class Main {
 		medico2.addHorario(horarioMedico2);
 		medico2.addHorario(horarioMedico3);
 		medico2.setUsuario(usuario2);
-		
+		medico2.setEstado(true);
+
 		MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
 
 		estado = medicoNegocio.exist(1);
@@ -225,6 +227,19 @@ public class Main {
 		System.out.println("\n ----- turnos -----");
 		List<Turno> listaTurno = turnoNegocio.readAll();
 		listaTurno.forEach(System.out::println);
+		
+//    	
+		medico1.setEstado(false);
+		medicoNegocio.update(medico1);
+		System.out.println("\n medico " + medico1.getLegajo() + " con estado false");
+		
+		System.out.println("\n ----- medicos activos-----");
+		List<Medico> listaMedicoActivos = medicoNegocio.readAllActive();
+		for (Medico medico : listaMedicoActivos) {
+			System.out.println("id medico= " + medico.getLegajo());
+		}
+		
+		
 		
 		((ClassPathXmlApplicationContext) appContext).close();
 

@@ -2,11 +2,9 @@ package frgp.utn.edu.ar.entidad;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,25 +16,31 @@ public class Usuario implements Serializable {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @Column(name="id_usuario")
     private Long id;
-  /*  
-    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private Medico medico;
-    */
+ 
     @Column(name = "nombre_usuario")
     private String nombreUsuario;
     
     private String contrasenia;
+    private boolean estado;
 
     public Usuario() {
 	}
 
-	public Usuario(/*Medico medico,*/ String nombreUsuario, String contrasenia) {
+	public Usuario(Long id, String nombreUsuario, String contrasenia, boolean estado) {
 		super();
-		/*this.medico = medico;*/
+		this.id = id;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
+		this.estado = estado;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	public Long getId() {
@@ -72,10 +76,8 @@ public class Usuario implements Serializable {
 	}
 
 	@Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", Usuario='" + nombreUsuario + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", contrasenia=" + contrasenia + ", estado="
+				+ estado + "]";
+	}
 }
