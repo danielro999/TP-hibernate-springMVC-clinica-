@@ -8,7 +8,7 @@ import org.hibernate.Session;
 //import dao.ConfiguracionHibernate;
 import frgp.utn.edu.ar.dao.IdaoEspecialidad;
 import frgp.utn.edu.ar.entidad.Especialidad;
-import frgp.utn.edu.ar.entidad.Usuario;
+
 
 
 public class  DaoEspecialidad implements IdaoEspecialidad{
@@ -76,8 +76,8 @@ public DaoEspecialidad() {
 	public List<Especialidad> readAll() {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Especialidad> pacientes = session.createQuery("FROM Especialidad").list();
-        return pacientes;
+        List<Especialidad> especialidades = session.createQuery("FROM Especialidad").list();
+        return especialidades;
 	}
 	
 	public boolean exist(long id) {
