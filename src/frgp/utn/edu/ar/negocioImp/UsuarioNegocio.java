@@ -32,10 +32,7 @@ public class UsuarioNegocio implements IUsuarioNegocio {
 		this.daoUsuario = daoUsuario;
 	}
 	
-	//Hasta aquí: Necesario para spring core
 
-
-	
 	public boolean add(Usuario usuario) {
 		return daoUsuario.add(usuario);
 	}
@@ -72,6 +69,11 @@ public class UsuarioNegocio implements IUsuarioNegocio {
 
 		public void setDao(IdaoUsuario dao) {
 			this.daoUsuario = dao;
+		}
+
+		@Override
+		public List<Usuario> readAllActive() {
+			return daoUsuario.readAllActive();
 		}
 
 }

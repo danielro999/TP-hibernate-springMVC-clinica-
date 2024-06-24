@@ -59,9 +59,9 @@ public class DaoUsuario implements IdaoUsuario {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
        
-        String hql = "FROM Usuario WHERE nombre = :nombreUsuario";
+        String hql = "FROM Usuario WHERE nombre_usuario = :nombreUsuario";
         Query query = session.createQuery(hql);
-        query.setParameter("nombre", nombreUsuario);
+        query.setParameter("nombreUsuario", nombreUsuario);
         // Ejecutar la consulta y obtener el resultado único
         Usuario usuario = (Usuario) query.uniqueResult();
         return usuario;
@@ -72,6 +72,13 @@ public class DaoUsuario implements IdaoUsuario {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Usuario> usuarios = session.createQuery("FROM Usuario").list();
+        return usuarios;
+	}
+	
+	public List<Usuario> readAllActive() {
+		Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        List<Usuario> usuarios = session.createQuery("FROM Usuario where estado= 1").list();
         return usuarios;
 	}
 
