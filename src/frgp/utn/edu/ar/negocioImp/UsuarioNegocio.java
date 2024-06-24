@@ -62,7 +62,10 @@ public class UsuarioNegocio implements IUsuarioNegocio {
 		return daoUsuario.delete(usuario);
 	}
 	
-	//esto que es -------------------------------es el nombre del bean ???????
+	
+	public Usuario validarUsuario(String usu, String pass) {
+		return daoUsuario.validarUsuario(usu, pass);
+	}
 		public IdaoUsuario getDao() {
 			return daoUsuario;
 		}

@@ -53,8 +53,7 @@ public class MedicoController {
 		Medico medico = (Medico)appContext.getBean("beanMedico");
 		MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
 		EspecialidadNegocio especialidadNegocio = (EspecialidadNegocio) appContext.getBean("beanEspecialidadNegocio");
-		System.out.println(apellido + " " +  correoElectronico + " "+estado +" "+fechaNacimiento+ " " +  especialidad);
-		
+
 		medico.setApellido(apellido);
 		medico.setNombre(nombre);
 		medico.setCorreoElectronico(correoElectronico);

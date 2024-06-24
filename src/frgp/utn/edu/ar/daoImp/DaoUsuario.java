@@ -98,6 +98,21 @@ public class DaoUsuario implements IdaoUsuario {
   
         return false;
 	}
+	
+	public Usuario validarUsuario(String usu, String pass) {
+		Session session = conexion.abrirConexion();
+        session.beginTransaction();
+       
+        String hql = "FROM Usuario WHERE nombreUsuario = :nombreUsuario AND contrasenia= :passUsuario ";
+        Query query = session.createQuery(hql);
+        query.setParameter("nombreUsuario", usu);
+        query.setParameter("passUsuario", pass);
+        // Ejecutar la consulta y obtener el resultado único
+        Usuario usuario = (Usuario) query.uniqueResult();
+        return usuario;
+		
+	}
+	
 
 	//modificar
 	public boolean update(Usuario usuario) {

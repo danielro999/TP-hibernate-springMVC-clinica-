@@ -16,5 +16,21 @@
 	<form action="cargaMedico.html" method="get">
 	<button >alta Medicos</button>
 	</form>
+	
+	<form action="redireccionar_pag3.html" method="get">
+		<div>
+		ingrese su usuario: 
+			<input type="text" name="txtUsuario"> 
+			
+		</div>
+		<div>
+			ingrese clave: 
+			<input type="text" name="txtPass"> 
+		</div>
+		<div>
+			<input type="submit" value="redireccion a pagina 3" name="btnRedirigirUsuario">
+		</div>
+		
+	</form>
 </body>
 </html>
