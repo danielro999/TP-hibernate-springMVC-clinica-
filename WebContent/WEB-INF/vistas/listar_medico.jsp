@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<%@ include file="encabezado.jsp" %>
     <div class="container">
         <h2 class="mt-5">Lista de Médicos</h2>
         <table class="table table-striped">
@@ -40,7 +41,7 @@
                         <td>${medico.localidad}</td>
                         <td>${medico.sexo}</td>
                         <td>${medico.telefono}</td>
-                        <td>${medico.especialidad}</td>
+                        <td>${medico.especialidad.getNombre()}</td>
                     </tr>
                 </c:forEach>
             </tbody>

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body style="background-color: White;">
+	<%@ include file="encabezado.jsp"%>
 	<div class="container">
 		<h2 class="mt-5">Alta de Médico</h2>
 		<form action="altaMedico.html" method="post">
@@ -68,8 +69,8 @@
 						<option value="${especialidad.nombre}">${especialidad.nombre}</option>
 					</c:forEach>
 				</select>
-			</div> 
-			
+			</div>
+
 			<div class="form-group">
 				<label>Estado</label><br>
 				<div class="form-check form-check-inline">
