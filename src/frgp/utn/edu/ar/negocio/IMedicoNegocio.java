@@ -7,7 +7,7 @@ import frgp.utn.edu.ar.entidad.Medico;
 public interface IMedicoNegocio {
 	
 	public boolean add(Medico medico);
-	public Medico readOne(String medico);
+	public Medico readOne(int legajo);
 	public List<Medico> readAll();
     public List<Medico> readAllActive(); 
 	public boolean exist(int id);

@@ -51,6 +51,7 @@ public DaoEspecialidad() {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
@@ -77,6 +78,7 @@ public DaoEspecialidad() {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Especialidad> especialidades = session.createQuery("FROM Especialidad").list();
+      
         return especialidades;
 	}
 	
@@ -119,6 +121,7 @@ public DaoEspecialidad() {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
@@ -153,6 +156,7 @@ public DaoEspecialidad() {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;

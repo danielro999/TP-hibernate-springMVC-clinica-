@@ -53,6 +53,7 @@ public class DaoTurno implements IdaoTurno{
 	            }
 	            e.printStackTrace();
 	        } finally {
+	        	session.close();
 	        }
 
 	        return estado;
@@ -94,6 +95,7 @@ public class DaoTurno implements IdaoTurno{
 	            }
 	            e.printStackTrace();
 	        } finally {
+	        	session.close();
 	        }
 
 	        return estado;
@@ -128,6 +130,7 @@ public class DaoTurno implements IdaoTurno{
 	            }
 	            e.printStackTrace();
 	        } finally {
+	        	session.close();
 	        }
 
 	        return estado;

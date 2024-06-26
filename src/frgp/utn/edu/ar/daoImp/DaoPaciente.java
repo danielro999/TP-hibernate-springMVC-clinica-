@@ -48,6 +48,7 @@ public class DaoPaciente implements IdaoPaciente {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
@@ -90,7 +91,9 @@ public class DaoPaciente implements IdaoPaciente {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
+        
 
         return estado;
     }
@@ -124,6 +127,7 @@ public class DaoPaciente implements IdaoPaciente {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;

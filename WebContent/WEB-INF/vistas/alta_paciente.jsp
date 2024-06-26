@@ -10,67 +10,70 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-
-	<h2>Formulario Alta de Paciente</h2>
 	<%@ include file="encabezado.jsp"%>
+	<div class="container">
+		<h2 class="mt-5">Formulario Alta de Paciente</h2>
 
-	<form action="altaPaciente.html" method="post">
+		<form action="altaPaciente.html" method="post">
 
-		<label for="nombre">Nombre:</label> <input type="text" id="nombre"
-			name="nombre" required><br>
-		<br>
-		<c:if test="${not empty errors['nombre']}">
-			<div style="color: red">${errors['nombre'].defaultMessage}</div>
-		</c:if>
-
-		<label for="apellido">Apellido:</label> <input type="text"
-			id="apellido" name="apellido" required><br>
-		<br>
-		<c:if test="${not empty errors['apellido']}">
-			<div style="color: red">${errors['apellido'].defaultMessage}</div>
-		</c:if>
-
-		<label for="dni">DNI:</label> <input type="text" id="dni" name="dni"
-			required pattern="\d{7,8}">
-		<c:if test="${not empty errors['dni']}">
-			<div style="color: red">${errors['dni'].defaultMessage}</div>
-		</c:if>
-		<br>
-		<br> <label for="telefono">Teléfono:</label> <input type="text"
-			id="telefono" name="telefono" pattern="\d*">
-		<c:if test="${not empty errors['telefono']}">
-			<div style="color: red">${errors['telefono'].defaultMessage}</div>
-		</c:if>
-		<br>
-		<br> <label for="direccion">Dirección:</label> <input type="text"
-			id="direccion" name="direccion"><br>
-		<br> <label for="localidad">Localidad:</label> <input type="text"
-			id="localidad" name="localidad"><br>
-		<br> <label for="provincia">Provincia:</label> <input type="text"
-			id="provincia" name="provincia"><br>
-		<br> <label for="fechaNacimiento">Fecha de Nacimiento
-			(DD/MM/YYYY):</label> <input type="text" id="fechaNacimiento"
-			name="fechaNacimiento" pattern="\d{2}/\d{2}/\d{4}">
-		<c:if test="${not empty errors['fechaNacimiento']}">
-			<div style="color: red">${errors['fechaNacimiento'].defaultMessage}</div>
-		</c:if>
-		<br>
-		<br> <label for="correoElectronico">Correo Electrónico:</label> <input
-			type="email" id="correoElectronico" name="correoElectronico">
-		<c:if test="${not empty errors['correoElectronico']}">
-			<div style="color: red">${errors['correoElectronico'].defaultMessage}</div>
-		</c:if>
-		<br>
-		<br> <label for="estado">Estado:</label> <select id="estado"
-			name="estado">
-			<option value="true">Activo</option>
-			<option value="false">Inactivo</option>
-		</select><br>
-		<br> <input type="submit" value="Guardar">
-
-
-
-	</form>
-
+			<div class="form-group">
+				<label for="nombre">Nombre</label> <input type="text"
+					class="form-control" id="nombre" name="nombre" required>
+			</div>
+			<div class="form-group">
+				<label for="apellido">Apellido</label> <input type="text"
+					class="form-control" id="apellido" name="apellido" required>
+			</div>
+			<div class="form-group">
+				<label for="dni">DNI</label> <input type="text" class="form-control"
+					id="dni" name="dni" required pattern="\d{7,8}">
+			</div>
+			<div class="form-group">
+				<label for="telefono">Teléfono</label> <input type="text"
+					class="form-control" id="telefono" name="telefono" required
+					pattern="\d*">
+			</div>
+			<div class="form-group">
+				<label for="telefono">Teléfono</label> <input type="text"
+					class="form-control" id="telefono" name="telefono" required>
+			</div>
+			<div class="form-group">
+				<label for="direccion">Dirección</label> <input type="text"
+					class="form-control" id="direccion" name="direccion" required>
+			</div>
+			<div class="form-group">
+				<label for="localidad">Localidad</label> <input type="text"
+					class="form-control" id="localidad" name="localidad" required>
+			</div>
+			<div class="form-group">
+				<label for="provincia">Provincia</label> <input type="text"
+					class="form-control" id="provincia" name="provincia" required>
+			</div>
+			<div class="form-group">
+				<label for="fechaNacimiento">Fecha de Nacimiento</label> <input
+					type="date" class="form-control" id="fechaNacimiento"
+					name="fechaNacimiento" required>
+			</div>
+			<div class="form-group">
+				<label for="correoElectronico">Correo Electrónico</label> <input
+					type="email" class="form-control" id="correoElectronico"
+					name="correoElectronico" required>
+			</div>
+			<div class="form-group">
+				<label>Estado</label><br>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="estado"
+						id="estadoActivo" value="1" required> <label
+						class="form-check-label" for="estadoActivo">Activo</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="estado"
+						id="estadoInactivo" value="0" required> <label
+						class="form-check-label" for="estadoInactivo">Inactivo</label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Dar de Alta</button>
+		</form>
+	</div>
 </body>
 </html>

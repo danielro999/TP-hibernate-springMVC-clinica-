@@ -24,7 +24,7 @@ public class DaoMedico implements IdaoMedico {
 		Medico medico=(Medico)session.get(Medico.class,legajo);
         if(medico!=null)
         	return true;
-        
+    
         return false;
 	}
     
@@ -64,20 +64,20 @@ public class DaoMedico implements IdaoMedico {
         return estado;
     }
     
-	public Medico readOne(String nombreMedico) {
+	public Medico readOne(int legajo) {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
        
-        String hql = "FROM Especialidad WHERE nombre = :nombre";
+        String hql = "FROM Medico WHERE legajo = :legajo";
         Query query = session.createQuery(hql);
-        query.setParameter("nombre", nombreMedico);
+        query.setParameter("legajo", legajo);
 
         // Ejecutar la consulta y obtener el resultado �nico
         Medico medico = (Medico) query.uniqueResult();
 
         //de profe
         //Especialidad especialidad = (Especialidad) session.get(Especialidad.class, nombreEspecialidad);
-
+    
         return medico;
 	}
     
@@ -90,7 +90,7 @@ public class DaoMedico implements IdaoMedico {
             session.beginTransaction();
 
             // Guardar el objeto
-            session.update(medico);
+            session.merge(medico);
 
             // Forzar la sincronización de la sesión con la base de datos
             session.flush();
@@ -145,7 +145,9 @@ public class DaoMedico implements IdaoMedico {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
+        
 
         return estado;
     }
@@ -154,6 +156,7 @@ public class DaoMedico implements IdaoMedico {
         Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medico> Medico = session.createQuery("FROM Medico").list();
+ 
         return Medico;
     }
     
@@ -161,6 +164,7 @@ public class DaoMedico implements IdaoMedico {
         Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medico> Medico = session.createQuery("FROM Medico where estado=1").list();
+ 
         return Medico;
     }
 

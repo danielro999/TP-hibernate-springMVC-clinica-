@@ -48,6 +48,7 @@ public class DaoUsuario implements IdaoUsuario {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
@@ -144,6 +145,7 @@ public class DaoUsuario implements IdaoUsuario {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
@@ -179,6 +181,7 @@ public class DaoUsuario implements IdaoUsuario {
             }
             e.printStackTrace();
         } finally {
+        	session.close();
         }
 
         return estado;
