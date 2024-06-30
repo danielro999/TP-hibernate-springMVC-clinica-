@@ -133,6 +133,30 @@ public class MedicoController {
 			mav.setViewName("index");
 			return mav;
 		}
+		
+	    @RequestMapping("eliminarMedico.html")
+	    public ModelAndView eliminarMedico(@RequestParam("id") int legajo) {
+	        ModelAndView mv = new ModelAndView();
+	        ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
+	        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
+	        Medico medico = medicoNegocio.readOne(legajo);
+	        
+	        if (medico != null) {
+	        	medico.setEstado(false);
+	            boolean eliminado = medicoNegocio.update(medico);
+	            
+	            if (eliminado) {
+	                mv.addObject("mensaje", "Medico eliminado exitosamente");
+	            } else {
+	                mv.addObject("mensaje", "Error al eliminar el medico");
+	            }
+	        } else {
+	            mv.addObject("mensaje", "medico no encontrado");
+	        }
+	        ((ClassPathXmlApplicationContext) appContext).close();
+	        mv.setViewName("index");
+	        return mv;
+	    }
 	
 	
 	

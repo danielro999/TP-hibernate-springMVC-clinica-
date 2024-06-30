@@ -50,6 +50,10 @@ public class MedicoNegocio implements IMedicoNegocio {
 		
 		return daoMedico.readAll();
 	}
+	
+	public List<Medico> filtarEspecialidad(String especialidad){
+		return daoMedico.filtarEspecialidad(especialidad);
+	}
 
 	
 	public boolean exist(int id) {

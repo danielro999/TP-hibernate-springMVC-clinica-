@@ -160,6 +160,16 @@ public class DaoMedico implements IdaoMedico {
         return Medico;
     }
     
+    
+    public List<Medico> filtarEspecialidad(String especialidad) {
+        Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Medico where id_especialidad = :especialidad");
+        query.setParameter("especialidad", especialidad);
+        List<Medico> Medico = (List<Medico>) query.list();
+ 
+        return Medico;
+    }
     public List<Medico> readAllActive() {
         Session session = conexion.abrirConexion();
         session.beginTransaction();

@@ -3,7 +3,7 @@
 	<a class="navbar-brand" href="paginaIndex.html">Clinica</a> <a
 		class="navbar-brand" href="listarMedicos.html">Medicos</a> <a
 		class="navbar-brand" href="listarPaciente.html">Pacientes</a> <a
-		class="navbar-brand" href="#">Turnos</a>
+		class="navbar-brand" href="ListarTurnos.html">Turnos</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNav" aria-controls="navbarNav"
 		aria-expanded="false" aria-label="Toggle navigation">

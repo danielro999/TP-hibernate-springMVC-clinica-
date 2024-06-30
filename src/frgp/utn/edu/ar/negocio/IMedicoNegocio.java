@@ -13,5 +13,6 @@ public interface IMedicoNegocio {
 	public boolean exist(int id);
 	public boolean update(Medico medico);
 	public boolean delete(Medico medico);
+	public List<Medico> filtarEspecialidad(String especialidad); 
 
 }
