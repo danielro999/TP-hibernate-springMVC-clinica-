@@ -6,14 +6,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Médicos</title>
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+	
+<script src="https://cdn.datatables.net/v/dt/jqc-1.12.4/datatables.min.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+
 </head>
 <body>
 	<%@ include file="encabezado.jsp"%>
 	<div class="container">
 		<h2 class="mt-5">Lista de Médicos</h2>
-		<table class="table table-striped">
+		<table id="table" class="table table-striped" style="width:100%">
 			<thead>
 				<tr>
 					<th scope="col">Legajo</th>
@@ -27,6 +33,7 @@
 					<th scope="col">Fecha de Nacimiento</th>
 					<th scope="col">Sexo</th>
 					<th scope="col">Estado</th>
+					<th scope="col">Modificar - Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,12 +60,23 @@
 									class="btn btn-danger btn-sm"
 									onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
 								</li>
-							</ul>
+							</ul> 
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<script>
+/* 	new DataTable('#table'); */
+
+		$(document).ready( function () {
+    $('#table').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+          }
+        });
+      });
+	</script>
 </body>
 </html>

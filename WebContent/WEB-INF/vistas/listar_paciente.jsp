@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="encabezado.jsp"%>
-	<div class="container" style="background-color: white; width: 662px">
+	<div class="container mt-5">
 		<h2 class="mt-5">Lista de Pacientes</h2>
 		<table class="table table-striped">
 			<thead>
