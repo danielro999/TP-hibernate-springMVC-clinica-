@@ -2,6 +2,7 @@ package frgp.utn.edu.ar.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,28 +25,26 @@ import frgp.utn.edu.ar.entidad.Usuario;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		boolean estado = false;
-		
-        Configuration configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create");  // Cambia "update" por el valor que desees
 
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).buildServiceRegistry();
+		Configuration configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");
+		configuration.setProperty("hibernate.hbm2ddl.auto", "create"); // Cambia "update" por el valor que desees
 
-        SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
+				.buildServiceRegistry();
 
-        
-        sessionFactory.close();
-		
+		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+		sessionFactory.close();
 
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
 
 		// crear especialidad (objetos)
 		Especialidad especialidad1 = (Especialidad) appContext.getBean("beanEspecialidad");
 		especialidad1.setNombre("Clinico");
-	
+
 		Especialidad especialidad2 = (Especialidad) appContext.getBean("beanEspecialidad");
 		especialidad2.setNombre("Pediatra");
 
@@ -53,19 +52,19 @@ public class Main {
 		especialidad3.setNombre("Cardiologo");
 
 		Especialidad especialidad4 = (Especialidad) appContext.getBean("beanEspecialidad");
-		especialidad4.setNombre("Oftalmologia");	
-		
+		especialidad4.setNombre("Oftalmologia");
+
 		Especialidad especialidad5 = (Especialidad) appContext.getBean("beanEspecialidad");
 		especialidad5.setNombre("Fisioterapia");
-		
+
 		Especialidad especialidad6 = (Especialidad) appContext.getBean("beanEspecialidad");
-		especialidad6.setNombre("Nutricionista");	
-		
+		especialidad6.setNombre("Nutricionista");
+
 		Especialidad especialidad7 = (Especialidad) appContext.getBean("beanEspecialidad");
 		especialidad7.setNombre("Dermatologia");
 
-		List <Especialidad> especialidades =  new ArrayList<Especialidad>();
-		
+		List<Especialidad> especialidades = new ArrayList<Especialidad>();
+
 		especialidades.add(especialidad1);
 		especialidades.add(especialidad2);
 		especialidades.add(especialidad3);
@@ -79,7 +78,7 @@ public class Main {
 
 		// usar metodo agregar si no esta
 
-		Long count =(long)1;
+		Long count = (long) 1;
 		for (Especialidad especialidad : especialidades) {
 			estado = especialidadNegocio.exist(count);
 			if (estado == false) {
@@ -88,15 +87,14 @@ public class Main {
 			} else {
 				System.out.println("ya existe " + especialidad.getNombre());
 			}
-			count+=1;
+			count += 1;
 		}
-
 
 		// traer las especilaidades
 		System.out.println("\n ----- especialidades -----");
 		List<Especialidad> listaEspecialidad = especialidadNegocio.readAll();
 		listaEspecialidad.forEach(especialidad -> System.out.println(especialidad));
-		
+
 		Paciente paciente1 = (Paciente) appContext.getBean("beanPaciente");
 		paciente1.setNombre("joel");
 		paciente1.setApellido("fernandez");
@@ -108,7 +106,7 @@ public class Main {
 		paciente1.setFechaNacimiento("2000-01-01");
 		paciente1.setCorreoElectronico("correo1@example.com");
 		paciente1.setEstado(true);
-	
+
 		Paciente paciente2 = (Paciente) appContext.getBean("beanPaciente");
 		paciente2.setNombre("walter");
 		paciente2.setApellido("guerrero");
@@ -120,7 +118,7 @@ public class Main {
 		paciente2.setFechaNacimiento("2999-01-01");
 		paciente2.setCorreoElectronico("correo1@example.com");
 		paciente2.setEstado(true);
-		
+
 		Paciente paciente3 = (Paciente) appContext.getBean("beanPaciente");
 		paciente3.setNombre("Esteban");
 		paciente3.setApellido("corol");
@@ -132,32 +130,31 @@ public class Main {
 		paciente3.setFechaNacimiento("2999-01-01");
 		paciente3.setCorreoElectronico("correo1@example.com");
 		paciente3.setEstado(true);
-		
-		List<Paciente>pacientes= new ArrayList<Paciente>();
 
-		
-        for (int i = 2; i <= 21; i++) {
-            Paciente paciente = (Paciente) appContext.getBean("beanPaciente");
-            paciente.setNombre("nombre" + i);
-            paciente.setApellido("apellido" + i);
-            paciente.setDni("1234567" + i);
-            paciente.setTelefono("555-12345" + i);
-            paciente.setDireccion("Calle " + i);
-            paciente.setLocalidad("Localidad" + i);
-            paciente.setProvincia("Buenos Aires");
-            paciente.setFechaNacimiento("2000-01-" + (i < 10 ? "0" + i : i));
-            paciente.setCorreoElectronico("correo" + i + "@example.com");
-            paciente.setEstado(true);
-    
-            pacientes.add(paciente);
-        }
-	
-        pacientes.add(paciente1);
-        pacientes.add(paciente2);
-        pacientes.add(paciente3);
-        
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+
+		for (int i = 1; i <= 21; i++) {
+			Paciente paciente = (Paciente) appContext.getBean("beanPaciente");
+			paciente.setNombre("nombre" + i);
+			paciente.setApellido("apellido" + i);
+			paciente.setDni("1234567" + i);
+			paciente.setTelefono("555-12345" + i);
+			paciente.setDireccion("Calle " + i);
+			paciente.setLocalidad("Localidad" + i);
+			paciente.setProvincia("Buenos Aires");
+			paciente.setFechaNacimiento("2000-01-" + (i < 10 ? "0" + i : i));
+			paciente.setCorreoElectronico("correo" + i + "@example.com");
+			paciente.setEstado(true);
+
+			pacientes.add(paciente);
+		}
+
+		pacientes.add(paciente1);
+		pacientes.add(paciente2);
+		pacientes.add(paciente3);
+
 		PacienteNegocio pacienteNegocio = (PacienteNegocio) appContext.getBean("beanPacienteNegocio");
-		
+
 		// pacientes carga a base de datos
 		for (Paciente paciente : pacientes) {
 			pacienteNegocio.add(paciente);
@@ -168,11 +165,11 @@ public class Main {
 		for (Paciente paciente0 : listaPaciente) {
 			System.out.println(paciente0);
 		}
-		
+
 		// crear usuario (objetos)
-		
+
 		Usuario usuario1 = (Usuario) appContext.getBean("beanUsuario");
-		usuario1.setNombreUsuario("waler");
+		usuario1.setNombreUsuario("walter");
 		usuario1.setContrasenia("123");
 		usuario1.setEstado(true);
 		usuario1.setAdmin(true);
@@ -188,63 +185,48 @@ public class Main {
 		usuario3.setContrasenia("123");
 		usuario3.setEstado(true);
 		usuario3.setAdmin(true);
-		
+
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		
+
 		// Crear 15 usuarios
-        for (int i = 2; i <= 15; i++) {
-        	Usuario usuario = (Usuario) appContext.getBean("beanUsuario");
-    		usuario.setNombreUsuario("usuario" +i);
-    		usuario.setContrasenia("pass"+i);
-    		usuario.setEstado(true);
-    		usuario.setAdmin(false);
-    
-    		usuarios.add(usuario);
-        }
-	
-        usuarios.add(usuario1);
-        usuarios.add(usuario2);
-        usuarios.add(usuario3);
 
-		// agregar a la base llamar bean
+		for (int i = 1; i <= 15; i++) {
+			Usuario usuario = (Usuario) appContext.getBean("beanUsuario");
+			usuario.setNombreUsuario("usuario" + i);
+			usuario.setContrasenia("pass" + i);
+			usuario.setEstado(true);
+			usuario.setAdmin(false);
+
+			usuarios.add(usuario);
+		}
+
+		usuarios.add(usuario1);
+		usuarios.add(usuario2);
+		usuarios.add(usuario3);
+
 		UsuarioNegocio usuarioNegocio = (UsuarioNegocio) appContext.getBean("beanUsuarioNegocio");
+		usuarios.forEach(usuario -> usuarioNegocio.add(usuario));
 
-		usuarios.forEach(usuario ->usuarioNegocio.add(usuario));
-		
-	
-		
 		System.out.println("\n ----- usuarios -----");
 		usuarios = usuarioNegocio.readAll();
 		usuarios.forEach(System.out::println);
-		
-		
-//		cambio de estado y update usuario	
-		usuario2.setEstado(false);
-		usuarioNegocio.update(usuario2);
-		System.out.println("\n usuario " + usuario2.getId() + " cambiado el estado a false");
-		
-		System.out.println("\n ----- usuarios ACTIVOS -----");
-		List<Usuario> listaUsuariosAct = usuarioNegocio.readAllActive();
-		for (Usuario usuario : listaUsuariosAct) {
-			System.out.println("id usuario activo id= " + usuario.getId());
-		}	
-				
-/*Horario medico*/		
-		
-		HorarioTrabajo horarioMedico1 =  (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+
+		/* Horario medico */
+
+		HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
 		horarioMedico1.setDia("lunes");
 		horarioMedico1.setHorario("12:00-1800 ");
-		
-		HorarioTrabajo horarioMedico2 =  (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+
+		HorarioTrabajo horarioMedico2 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
 		horarioMedico2.setDia("jueves");
 		horarioMedico2.setHorario("13:00-1600");
-		
-		HorarioTrabajo horarioMedico3 =  (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+
+		HorarioTrabajo horarioMedico3 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
 		horarioMedico3.setDia("lunes");
 		horarioMedico3.setHorario("13:00-1600");
-		
-/*Medico*/
-		
+
+		/* Medico */
+
 		Medico medico1 = (Medico) appContext.getBean("beanMedico");
 		medico1.setApellido("gerez");
 		medico1.setNombre("daniel");
@@ -257,7 +239,7 @@ public class Main {
 		medico1.addHorario(horarioMedico1);
 		medico1.setUsuario(usuario1);
 		medico1.setEstado(true);
-		
+
 		Medico medico2 = (Medico) appContext.getBean("beanMedico");
 		medico2.setApellido("chavez");
 		medico2.setNombre("jose");
@@ -267,56 +249,55 @@ public class Main {
 		medico2.setEspecialidad(especialidad2);
 		medico2.setFechaNacimiento("2000-01-02");
 		medico1.setLocalidad("garin");
-		/*medico2.addHorario(horarioMedico1);*/ //error de key duplicada
+		/* medico2.addHorario(horarioMedico1); */ // error de key duplicada
 		medico2.addHorario(horarioMedico2);
 		medico2.addHorario(horarioMedico3);
 		medico2.setUsuario(usuario2);
 		medico2.setEstado(true);
 
 		MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
+		medicoNegocio.add(medico1);
+		medicoNegocio.add(medico2);
 
-		estado = medicoNegocio.exist(1);
-		
-		if (estado == false) {
-			estado = medicoNegocio.add(medico1);
-		} else {
-			System.out.println("ya existe medico");
-		}
-		
-		estado = medicoNegocio.exist(2);
+		Random rand = new Random();
+		List<Medico> medicos = new ArrayList<>();
+		for (int i = 0; i < 15; i++) {
+			Usuario usuario = usuarios.get(i);
+			Especialidad especialidad = especialidades.get(rand.nextInt(especialidades.size()));
 
-		if (estado == false) {
-			estado = medicoNegocio.add(medico2);
-		} else {
-			System.out.println("ya existe medico");
+			Medico medico = (Medico) appContext.getBean("beanMedico");
+
+			medico.setNombre("Nombre" + (i + 1));
+			medico.setApellido("Apellido" + (i + 1));
+			medico.setCorreoElectronico("correo" + (i + 1) + "@ejemplo.com");
+			medico.setDireccion("Dirección" + (i + 1));
+			medico.setEstado(true);
+			medico.setSexo((i % 2 == 0) ? "M" : "F");
+			medico.setFechaNacimiento("1990-01-01");
+			medico.setUsuario(usuario);
+			medico.setEspecialidad(especialidad);
+
+			medicos.add(medico);
+			medicoNegocio.add(medico);
 		}
+
+
 		System.out.println("\n ----- medicos -----");
 		List<Medico> listaMedico = medicoNegocio.readAll();
 		for (Medico medico : listaMedico) {
 			System.out.println(medico);
 		}
-		
-		medico1.setEstado(false);
-		medicoNegocio.update(medico1);
-		System.out.println("\n medico " + medico1.getLegajo() + " cambiado el estado a false");
-		
-		System.out.println("\n ----- medicos ACTIVOS-----");
-		List<Medico> listaMedicoActivos = medicoNegocio.readAllActive();
-		for (Medico medico : listaMedicoActivos) {
-			System.out.println("id medico activo id= " + medico.getLegajo());
-		}
-		
-			
-	//turnos
-		
-		Turno turno1 = (Turno) appContext.getBean("beanTurno");		
+
+		// turnos
+
+		Turno turno1 = (Turno) appContext.getBean("beanTurno");
 		turno1.setPaciente(paciente1); // Suponiendo que ya tienes paciente1 instanciado
 		turno1.setFecha("2024-06-10");
 		turno1.setHora("10:00");
 		turno1.setObservacion("Consulta rutinaria");
 		turno1.setEstado("Confirmado");
 		turno1.setMedico(medico1);
-		
+
 		Turno turno2 = (Turno) appContext.getBean("beanTurno");
 		turno2.setPaciente(paciente2); // Suponiendo que ya tienes paciente1 instanciado
 		turno2.setFecha("2024-06-12");
@@ -325,23 +306,16 @@ public class Main {
 		turno2.setEstado("Confirmado");
 		turno2.setMedico(medico2);
 
-		TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
-		boolean boolTurno1 = turnoNegocio.add(turno1);
-		boolean boolTurno2 = turnoNegocio.add(turno2);
-		
-		System.out.println("\n ----- turnos -----");
-		List<Turno> listaTurno = turnoNegocio.readAll();
-		listaTurno.forEach(System.out::println);
-		
-		
-		
-//    	update estado false para el borrado logico
-		
+//		TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
+//		boolean boolTurno1 = turnoNegocio.add(turno1);
+//		boolean boolTurno2 = turnoNegocio.add(turno2);
+//
+//		System.out.println("\n ----- turnos -----");
+//		List<Turno> listaTurno = turnoNegocio.readAll();
+//		listaTurno.forEach(System.out::println);
+
 		((ClassPathXmlApplicationContext) appContext).close();
-		
 
-
-	
 	}
 
 }

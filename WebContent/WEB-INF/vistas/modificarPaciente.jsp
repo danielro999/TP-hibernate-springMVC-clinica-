@@ -63,9 +63,19 @@
 					required>
 			</div>
 			<div class="form-group">
-				<label for="estado">Estado:</label> <input type="text"
-					class="form-control" id="estado" name="estado" value="true"
-					readonly>
+				<label>Estado</label><br>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="estado"
+						id="estadoActivo" value="1"
+						${paciente.estado == "true" ? 'checked' : ''}> <label
+						class="form-check-label" for="estadoActivo">Activo</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="estado"
+						id="estadoInactivo" value="0"
+						${paciente.estado == "false" ? 'checked' : ''}> <label
+						class="form-check-label" for="estadoInactivo">Inactivo</label>
+				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar
 				Cambios</button>
