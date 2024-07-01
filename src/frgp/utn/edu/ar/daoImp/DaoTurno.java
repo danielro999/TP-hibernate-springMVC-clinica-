@@ -153,10 +153,6 @@ public class DaoTurno implements IdaoTurno{
 	        this.conexion = conexion;
 	    }
 
-		@Override
-		public Turno readOne(Long id) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+
 	}
 	       

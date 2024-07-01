@@ -43,7 +43,7 @@ public class TurnoController {
 	 
 	 }
 	 @RequestMapping("irmodificarTurno.html")
-	    public ModelAndView irmodificarTurno(@RequestParam("id") Long id) {
+	    public ModelAndView irmodificarTurno(@RequestParam("id") int id) {
 	        ModelAndView mav = new ModelAndView();
 	        
 	        ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
@@ -51,7 +51,7 @@ public class TurnoController {
 	        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
 	        PacienteNegocio pacienteNegocio = (PacienteNegocio) appContext.getBean("beanPacienteNegocio");
 	        Turno turno = turnoNegocio.readOne(id);
-	       
+	     
 	        
 	        if (turno != null) {
 	        	
@@ -70,7 +70,7 @@ public class TurnoController {
 	 
 	 @RequestMapping("modificarTurno.html")
 	 public ModelAndView modificarTurno(
-			  Long id,
+			  int id,
 		      int Legajo,
 	          Long pacienteId,
 	          String fecha,
@@ -148,7 +148,7 @@ public class TurnoController {
 	 }
 	 
 	 @RequestMapping("eliminarTurno.html")
-	 public ModelAndView eliminarTurno(@RequestParam("id") Long id) {
+	 public ModelAndView eliminarTurno(@RequestParam("id") int id) {
 	     ModelAndView mv = new ModelAndView();
 	     ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
 	     TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");

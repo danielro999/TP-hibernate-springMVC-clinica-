@@ -36,7 +36,7 @@ public class TurnoNegocio implements ITurnoNegocio {
         return daoTurno.add(turno);
     }
 
-    public Turno readOne(Long id) {
+    public Turno readOne(int id) {
         return daoTurno.readOne(id);
     }
 

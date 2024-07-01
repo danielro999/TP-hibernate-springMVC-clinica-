@@ -23,17 +23,21 @@ public class Usuario implements Serializable {
     
     private String contrasenia;
     private boolean estado;
+    private boolean admin;
 
     public Usuario() {
 	}
 
-	public Usuario(Long id, String nombreUsuario, String contrasenia, boolean estado) {
-		super();
-		this.id = id;
-		this.nombreUsuario = nombreUsuario;
-		this.contrasenia = contrasenia;
-		this.estado = estado;
+
+	public boolean isAdmin() {
+		return admin;
 	}
+
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 
 	public boolean isEstado() {
 		return estado;
@@ -78,6 +82,6 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", contrasenia=" + contrasenia + ", estado="
-				+ estado + "]";
+				+ estado + ", es admin= " + admin + "]";
 	}
 }

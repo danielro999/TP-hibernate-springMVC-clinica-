@@ -10,7 +10,7 @@ public interface IdaoTurno{
 
     boolean add(Turno turno);
 
-    Turno readOne(Long id);
+    Turno readOne(int id);
 
     List<Turno> readAll();
 
