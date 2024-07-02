@@ -55,10 +55,8 @@ public class LoginController {
 	@RequestMapping("paginaLoginSalir.html")
 	public ModelAndView paginaLoginSalir() {
 		ModelAndView mav = new ModelAndView();
-		Usuario valor= new Usuario();
-		valor.setNombreUsuario("Loguearse");
-		String valorStr="Ingresar Usuario";
-		mav.addObject("usuarioLogin",valor);
+		Usuario usuarioNull= new Usuario();
+		mav.addObject("usuarioLogin",usuarioNull);
 		mav.setViewName("loginUsuario");
 		return mav;
 	}
