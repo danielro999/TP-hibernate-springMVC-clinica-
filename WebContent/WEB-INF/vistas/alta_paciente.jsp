@@ -34,10 +34,6 @@
 					pattern="\d*">
 			</div>
 			<div class="form-group">
-				<label for="telefono">Teléfono</label> <input type="text"
-					class="form-control" id="telefono" name="telefono" required>
-			</div>
-			<div class="form-group">
 				<label for="direccion">Dirección</label> <input type="text"
 					class="form-control" id="direccion" name="direccion" required>
 			</div>

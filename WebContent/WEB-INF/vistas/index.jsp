@@ -12,11 +12,12 @@
 	rel="stylesheet">
 <title>Clinica</title>
 </head>
-<body style="background-color: white;">
+<body>
 
 	<%@ include file="encabezado.jsp"%>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- <a class="navbar-brand" href="#">Clinica</a> -->
+	
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNav" aria-controls="navbarNav"
 		aria-expanded="false" aria-label="Toggle navigation">

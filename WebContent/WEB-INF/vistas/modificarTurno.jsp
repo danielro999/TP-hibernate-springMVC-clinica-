@@ -48,8 +48,11 @@
             <div class="form-group">
                 <label for="estado">Estado:</label>
                 <select class="form-control" id="estado" name="estado" required>
-                    <option value="Confirmado" ${turno.estado == 'Confirmado' ? 'selected' : ''}>Confirmado</option>
+                    <option value="Pendiente" ${turno.estado == 'Pendiente' ? 'selected' : ''}>Pendiente</option>
+                    <option value="Presente" ${turno.estado == 'Presente' ? 'selected' : ''}>Presente</option>
+                    <option value="Ausente" ${turno.estado == 'Ausente' ? 'selected' : ''}>Ausente</option>
                     <option value="Cancelado" ${turno.estado == 'Cancelado' ? 'selected' : ''}>Cancelado</option>
+                    <option value="Eliminado" ${turno.estado == 'Eliminado' ? 'selected' : ''}>Eliminado</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>

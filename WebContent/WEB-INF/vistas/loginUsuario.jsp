@@ -10,7 +10,7 @@
         	<h2>${usuario}</h2>
             <div class="col-md-6">
                 <h2 class="text-center mt-5">Login</h2>
-                <form action="redireccionar_pag3.html" method="get">
+                <form action="ValidarUsuario.html" method="get">
                     <div class="form-group">
                         <label for="username">Nombre Usuario:</label>
                         <input type="text" class="form-control" id="username" name="txtUsuario" required>

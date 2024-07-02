@@ -17,9 +17,9 @@
 </head>
 <body>
 	<%@ include file="encabezado.jsp"%>
-	<div class="container">
+	<div class="container mt-5">
 		<h2 class="mt-5">Lista de Médicos</h2>
-		<table id="table" class="table table-striped" style="width:100%">
+		<table id="tableMedicos" class="table table-striped">
 			<thead>
 				<tr>
 					<th scope="col">Legajo</th>
@@ -33,7 +33,8 @@
 					<th scope="col">Fecha de Nacimiento</th>
 					<th scope="col">Sexo</th>
 					<th scope="col">Estado</th>
-					<th scope="col">Modificar - Eliminar</th>
+					<th scope="col">Modificar</th>
+					<th scope="col">Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,6 +53,26 @@
 						<td>${medico.estado}</td>
 						<td>
 							<ul class="list-inline m-0">
+								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+									<li class="list-inline-item"><a
+									href="irmodificarMedico.html?id=${medico.legajo}"
+									class="btn btn-warning btn-sm">Modificar</a></li>
+								</c:if>
+							</ul>
+						</td>
+						<td>
+							<ul class="list-inline m-0">
+								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+									<li class="list-inline-item"><a
+										href="eliminarMedico.html?id=${medico.legajo}"
+										class="btn btn-danger btn-sm"
+										onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
+									</li>
+								</c:if>
+							</ul>
+						</td>
+						<%-- <td>
+							<ul class="list-inline m-0">
 								<li class="list-inline-item"><a
 									href="irmodificarMedico.html?id=${medico.legajo}"
 									class="btn btn-warning btn-sm">Modificar</a></li>
@@ -61,22 +82,40 @@
 									onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
 								</li>
 							</ul> 
-						</td>
+						</td> --%>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<script>
-/* 	new DataTable('#table'); */
-
-		$(document).ready( function () {
-    $('#table').DataTable( {
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-          }
-        });
-      });
-	</script>
+	$(document).ready( function () {
+$('#tableMedicos').DataTable({
+    "language":{
+    	"sProcessing":     "Procesando...",
+    	"sLengthMenu":     "Mostrar _MENU_ registros",
+    	"sZeroRecords":    "No se encontraron resultados",
+    	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+    	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    	"sInfoPostFix":    "",
+    	"sSearch":         "Buscar:",
+    	"sUrl":            "",
+    	"sInfoThousands":  ",",
+    	"sLoadingRecords": "Cargando...",
+    	"oPaginate": {
+    		"sFirst":    "Primero",
+    		"sLast":     "Último",
+    		"sNext":     "Siguiente",
+    		"sPrevious": "Anterior"
+    	},
+    	"oAria": {
+    		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+    		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    	}}
+    });
+  });
+</script>
 </body>
 </html>

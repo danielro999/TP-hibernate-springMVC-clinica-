@@ -66,15 +66,7 @@ public class Usuario implements Serializable {
 	public String getContrasenia() {
 		return contrasenia;
 	}
-/*
-	public Medico getMedico() {
-		return medico;
-	}
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
-	}
-*/
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}

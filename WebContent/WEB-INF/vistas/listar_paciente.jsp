@@ -6,14 +6,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Pacientes</title>
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+	
+<script src="https://cdn.datatables.net/v/dt/jqc-1.12.4/datatables.min.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+	
 </head>
 <body>
 	<%@ include file="encabezado.jsp"%>
 	<div class="container mt-5">
 		<h2 class="mt-5">Lista de Pacientes</h2>
-		<table class="table table-striped">
+		<table id="tablePacientes" class="table table-striped">
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
@@ -27,7 +33,7 @@
 					<th scope="col">Provincia</th>
 					<th scope="col">Teléfono</th>
 					<th scope="col">DNI</th>
-					<th scope="col">Acciones</th>
+					<th scope="col">Modificar - Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,5 +67,34 @@
 			</tbody>
 		</table>
 	</div>
+		<script>
+		$(document).ready( function () {
+    $('#tablePacientes').DataTable({
+        "language":{
+        	"sProcessing":     "Procesando...",
+        	"sLengthMenu":     "Mostrar _MENU_ registros",
+        	"sZeroRecords":    "No se encontraron resultados",
+        	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+        	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+        	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        	"sInfoPostFix":    "",
+        	"sSearch":         "Buscar:",
+        	"sUrl":            "",
+        	"sInfoThousands":  ",",
+        	"sLoadingRecords": "Cargando...",
+        	"oPaginate": {
+        		"sFirst":    "Primero",
+        		"sLast":     "Último",
+        		"sNext":     "Siguiente",
+        		"sPrevious": "Anterior"
+        	},
+        	"oAria": {
+        		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        	}}
+        });
+      });
+	</script>
 </body>
 </html>
