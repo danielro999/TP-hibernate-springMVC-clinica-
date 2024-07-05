@@ -14,7 +14,7 @@
         <form action="altaTurno.html" method="post">
             <div class="form-group">
                 <label for="Legajo">Médico:</label>
-                <select class="form-control" id="Legajo" name="Legajo">
+                <select class="form-control" id="Legajo" name="Legajo" required>
                     <c:forEach var="medico" items="${medicos}">
                         <option value="${medico.legajo}">${medico.nombre} ${medico.apellido}</option>
                     </c:forEach>
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="pacienteId">Paciente:</label>
-                <select class="form-control" id="pacienteId" name="pacienteId">
+                <select class="form-control" id="pacienteId" name="pacienteId" required>
                     <c:forEach var="paciente" items="${pacientes}">
                         <option value="${paciente.id}">${paciente.nombre} ${paciente.apellido}</option>
                     </c:forEach>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha"/>
+                <input type="date" class="form-control" id="fecha" name="fecha" required/>
             </div>
             <div class="form-group">
                 <label for="hora">Hora:</label>
