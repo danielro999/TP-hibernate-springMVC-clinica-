@@ -105,7 +105,7 @@ public class TurnoController {
 	     }
 
 	     ((ClassPathXmlApplicationContext) appContext).close();
-	     mav.setViewName("index");
+	     mav.setViewName("redirect:/paginaIndex.html");
 	     return mav;
 	 }
 	 
