@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.entidad;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,7 @@ import javax.persistence.CascadeType;
 		private Usuario usuario;
 			
 		@OneToMany(cascade= {CascadeType.ALL})
-		private List<HorarioTrabajo> listaHorarioTrabajo;
+		private List<HorarioTrabajo> listaHorarioTrabajo=new ArrayList<HorarioTrabajo>();
 		
 		private String nombre;
 		private String apellido;
@@ -83,11 +84,14 @@ import javax.persistence.CascadeType;
 			return listaHorarioTrabajo;
 		}
 
-
 		public void setListaHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
 			this.listaHorarioTrabajo = listaHorarioTrabajo;
 		}
 
+		
+		public void addHorario(HorarioTrabajo HorarioTrabajo) {
+			this.listaHorarioTrabajo.add(HorarioTrabajo);
+		}
 
 		public boolean isEstado() {
 			return estado;
@@ -187,18 +191,6 @@ import javax.persistence.CascadeType;
 			this.telefono = telefono;
 		}
 			
-		
-		public List<HorarioTrabajo> getHorarioTrabajo() {
-			return listaHorarioTrabajo;
-		}
-
-		public void setHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
-			this.listaHorarioTrabajo = listaHorarioTrabajo;
-		}
-		
-		public void addHorario(HorarioTrabajo HorarioTrabajo) {
-			this.listaHorarioTrabajo.add(HorarioTrabajo);
-		}
 
 		//met ToString()
 		

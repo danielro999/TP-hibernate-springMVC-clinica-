@@ -76,7 +76,7 @@
 							<ul class="list-inline m-0">
 								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
 									<li class="list-inline-item"><a
-										href="altaHorarios.html?id=${medico.legajo}"
+										href="irAltaHorarios.html?id=${medico.legajo}"
 										class="btn btn-warning  btn-sm">Horarios</a>
 									</li>
 								</c:if>

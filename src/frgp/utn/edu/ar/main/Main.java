@@ -217,18 +217,18 @@ public class Main {
 			
 		for (int i = 0; i < 6; i++) {
 				HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-				horarioMedico1.setDia("lunes");
-				horarioMedico1.setHorario(String.valueOf(11+i));
+				horarioMedico1.setLunes(String.valueOf(11+i));
+				horarioMedico1.setMartes(String.valueOf(11+i));
 				horariosMedico1.add(horarioMedico1);
 		}
 
 		HorarioTrabajo horarioMedico2 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico2.setDia("jueves");
-		horarioMedico2.setHorario("13:00-1600");
+		horarioMedico2.setSabado("12");
+		horarioMedico2.setSabado("13");
 
 		HorarioTrabajo horarioMedico3 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico3.setDia("lunes");
-		horarioMedico3.setHorario("13:00-1600");
+		horarioMedico3.setViernes("19");
+		horarioMedico3.setJueves("13");
 
 		/* Medico */
 
@@ -241,7 +241,7 @@ public class Main {
 		medico1.setFechaNacimiento("2000-01-02");
 		medico1.setLocalidad("virreyes");
 		medico1.setEspecialidad(especialidad1);
-		medico1.setHorarioTrabajo(horariosMedico1);
+		medico1.addHorario(horarioMedico2);
 		medico1.setUsuario(usuario1);
 		medico1.setEstado(true);
 

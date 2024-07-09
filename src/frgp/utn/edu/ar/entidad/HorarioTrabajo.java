@@ -17,46 +17,85 @@ public class HorarioTrabajo implements Serializable{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
 		
-	    private String dia;
+	    private String lunes;
 	    
-	    private String horario;
+	    private String martes;
+	    
+	    private String miercoles;
+	    
+	    private String jueves;
+	    
+	    private String viernes;
+	    
+	    private String sabado;
+	    
+	    private String domingo;
 	    
 	    public HorarioTrabajo() {
 	
 	    }
-	    public HorarioTrabajo(String dia, String horario) {
-	        this.dia = dia;
-	        this.horario = horario;
-	    }
 
-	    public String getDia() {
-	        return dia;
-	    }
-
-	    public void setDia(String dia) {
-	        this.dia = dia;
-	    }
-
-	    public String getHorario() {
-	        return horario;
-	    }
-
-	    public void setHorario(String horario) {
-	        this.horario = horario;
-	    }
-	 /*   
-	    public Medico getMedico() {
-			return medico;
+		public String getLunes() {
+			return lunes;
 		}
 
-		public void setMedico(Medico medico) {
-			this.medico = medico;
+		public void setLunes(String lunes) {
+			this.lunes = lunes;
 		}
-*/
+
+		public String getMartes() {
+			return martes;
+		}
+
+		public void setMartes(String martes) {
+			this.martes = martes;
+		}
+
+		public String getMiercoles() {
+			return miercoles;
+		}
+
+		public void setMiercoles(String miercoles) {
+			this.miercoles = miercoles;
+		}
+
+		public String getJueves() {
+			return jueves;
+		}
+
+		public void setJueves(String jueves) {
+			this.jueves = jueves;
+		}
+
+		public String getViernes() {
+			return viernes;
+		}
+
+		public void setViernes(String viernes) {
+			this.viernes = viernes;
+		}
+
+		public String getSabado() {
+			return sabado;
+		}
+
+		public void setSabado(String sabado) {
+			this.sabado = sabado;
+		}
+
+		public String getDomingo() {
+			return domingo;
+		}
+
+		public void setDomingo(String domingo) {
+			this.domingo = domingo;
+		}
 
 		@Override
 		public String toString() {
-			return "Horario de trabajo [dia=" + dia + ", horario=" + horario + "]";
+			return "HorarioTrabajo [id=" + id + ", lunes=" + lunes + ", martes=" + martes + ", miercoles=" + miercoles
+					+ ", jueves=" + jueves + ", viernes=" + viernes + ", sabado=" + sabado + ", domingo=" + domingo
+					+ "]";
 		}
 
 	 
