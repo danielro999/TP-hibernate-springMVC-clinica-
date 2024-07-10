@@ -30,17 +30,25 @@ public class HorarioTrabajoController {
         Medico medico = medicoNegocio.readOne(legajo);
         
         List<HorarioTrabajo> horariosTrabajo = new ArrayList<HorarioTrabajo>();
-        Map<String, Boolean> horarios =  new HashMap<>();
         horariosTrabajo	= medico.getListaHorarioTrabajo();
-        for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
-        	
-        	 String hora1 = horarioTrabajo.getLunes();
-        	 horarios.put("lunes_"+ hora1, true);
-        	 String hora2 = horarioTrabajo.getMartes();
-        	 horarios.put("martes_"+ hora2, true);
-		}
-        System.out.println(horarios);
-        mav.addObject("horarios", horarios);
+       
+//        Map<String, Boolean> horarios =  new HashMap<>();
+//        int cont = 9;
+//        for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
+//        	System.out.println(cont);
+//        	 String hora =String.valueOf(cont);
+//        	 horarios.put("lunes_"+ hora, horarioTrabajo.isLunes());
+//        	 horarios.put("martes_"+ hora, horarioTrabajo.isMartes());
+//        	 horarios.put("miercoles_"+ hora, horarioTrabajo.isMiercoles());
+//        	 horarios.put("jueves_"+ hora, horarioTrabajo.isJueves());
+//        	 horarios.put("viernes_"+ hora, horarioTrabajo.isViernes());
+//        	 horarios.put("sabado_"+ hora, horarioTrabajo.isSabado());
+//        	 horarios.put("domingo_"+ hora, horarioTrabajo.isDomingo());
+//        	 cont+=1;
+//		}
+//        System.out.println(horarios);
+        
+        mav.addObject("horarios", horariosTrabajo);
         mav.addObject("medico", medico);
         mav.setViewName("alta_horario");
         

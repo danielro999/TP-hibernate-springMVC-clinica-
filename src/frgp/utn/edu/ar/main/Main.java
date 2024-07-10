@@ -214,22 +214,49 @@ public class Main {
 		/* Horario medico */
 
 		List <HorarioTrabajo> horariosMedico1 = new ArrayList<HorarioTrabajo>();
+		List <HorarioTrabajo> horariosMedico2 = new ArrayList<HorarioTrabajo>();
+		List <HorarioTrabajo> horariosMedico3 = new ArrayList<HorarioTrabajo>();
 			
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 14; i++) {
 				HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-				horarioMedico1.setLunes(String.valueOf(11+i));
-				horarioMedico1.setMartes(String.valueOf(11+i));
+				horarioMedico1.setLunes(false);
+				horarioMedico1.setMartes(false);
+				horarioMedico1.setMiercoles(false);
+				horarioMedico1.setJueves(false);
+				horarioMedico1.setViernes(false);
+				horarioMedico1.setSabado(false);
+				horarioMedico1.setDomingo(false);
+				
 				horariosMedico1.add(horarioMedico1);
 		}
+		
+		for (int i = 0; i < 14; i++) {
+			HorarioTrabajo horarioMedico2 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			horarioMedico2.setLunes(false);
+			horarioMedico2.setMartes(false);
+			horarioMedico2.setMiercoles(false);
+			horarioMedico2.setJueves(false);
+			horarioMedico2.setViernes(false);
+			horarioMedico2.setSabado(false);
+			horarioMedico2.setDomingo(false);
 
-		HorarioTrabajo horarioMedico2 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico2.setSabado("12");
-		horarioMedico2.setSabado("13");
+			horariosMedico2.add(horarioMedico2);
+	}
 
-		HorarioTrabajo horarioMedico3 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico3.setViernes("19");
-		horarioMedico3.setJueves("13");
+		for (int i = 0; i < 14; i++) {
+			HorarioTrabajo horarioMedico3 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			horarioMedico3.setLunes(false);
+			horarioMedico3.setMartes(false);
+			horarioMedico3.setMiercoles(false);
+			horarioMedico3.setJueves(false);
+			horarioMedico3.setViernes(false);
+			horarioMedico3.setSabado(false);
+			horarioMedico3.setDomingo(false);
 
+			horariosMedico3.add(horarioMedico3);
+	}
+
+		
 		/* Medico */
 
 		Medico medico1 = (Medico) appContext.getBean("beanMedico");
@@ -241,7 +268,7 @@ public class Main {
 		medico1.setFechaNacimiento("2000-01-02");
 		medico1.setLocalidad("virreyes");
 		medico1.setEspecialidad(especialidad1);
-		medico1.addHorario(horarioMedico2);
+		medico1.setListaHorarioTrabajo(horariosMedico2);
 		medico1.setUsuario(usuario1);
 		medico1.setEstado(true);
 
@@ -253,10 +280,8 @@ public class Main {
 		medico2.setDireccion("garibal 232");
 		medico2.setEspecialidad(especialidad2);
 		medico2.setFechaNacimiento("2000-01-02");
-		medico1.setLocalidad("garin");
-		/* medico2.addHorario(horarioMedico1); */ // error de key duplicada
-		medico2.addHorario(horarioMedico2);
-		medico2.addHorario(horarioMedico3);
+		medico2.setLocalidad("garin");
+		medico2.setListaHorarioTrabajo(horariosMedico3); 
 		medico2.setUsuario(usuario2);
 		medico2.setEstado(true);
 
@@ -265,11 +290,12 @@ public class Main {
 		medicoNegocio.add(medico2);
 
 		Random rand = new Random();
+		
 		List<Medico> medicos = new ArrayList<>();
+		
 		for (int i = 0; i < 15; i++) {
 			Usuario usuario = usuarios.get(i);
 			Especialidad especialidad = especialidades.get(rand.nextInt(especialidades.size()));
-
 			Medico medico = (Medico) appContext.getBean("beanMedico");
 
 			medico.setNombre("Nombre" + (i + 1));

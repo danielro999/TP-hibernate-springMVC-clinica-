@@ -25,7 +25,7 @@
 
 	<bean id="beanMedico" class="frgp.utn.edu.ar.entidad.Medico"
 		scope="prototype">
-		<property name="horarioTrabajo">
+		<property name="ListaHorarioTrabajo">
 			<list>
 			</list>
 		</property>

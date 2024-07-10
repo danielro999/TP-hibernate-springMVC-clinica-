@@ -17,77 +17,77 @@ public class HorarioTrabajo implements Serializable{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
 		
-	    private String lunes;
+	    private boolean lunes;
 	    
-	    private String martes;
+	    private boolean martes;
 	    
-	    private String miercoles;
+	    private boolean miercoles;
 	    
-	    private String jueves;
+	    private boolean jueves;
 	    
-	    private String viernes;
+	    private boolean viernes;
 	    
-	    private String sabado;
+	    private boolean sabado;
 	    
-	    private String domingo;
+	    private boolean domingo;
 	    
 	    public HorarioTrabajo() {
 	
 	    }
 
-		public String getLunes() {
+		public boolean isLunes() {
 			return lunes;
 		}
 
-		public void setLunes(String lunes) {
+		public void setLunes(boolean lunes) {
 			this.lunes = lunes;
 		}
 
-		public String getMartes() {
+		public boolean isMartes() {
 			return martes;
 		}
 
-		public void setMartes(String martes) {
+		public void setMartes(boolean martes) {
 			this.martes = martes;
 		}
 
-		public String getMiercoles() {
+		public boolean isMiercoles() {
 			return miercoles;
 		}
 
-		public void setMiercoles(String miercoles) {
+		public void setMiercoles(boolean miercoles) {
 			this.miercoles = miercoles;
 		}
 
-		public String getJueves() {
+		public boolean isJueves() {
 			return jueves;
 		}
 
-		public void setJueves(String jueves) {
+		public void setJueves(boolean jueves) {
 			this.jueves = jueves;
 		}
 
-		public String getViernes() {
+		public boolean isViernes() {
 			return viernes;
 		}
 
-		public void setViernes(String viernes) {
+		public void setViernes(boolean viernes) {
 			this.viernes = viernes;
 		}
 
-		public String getSabado() {
+		public boolean isSabado() {
 			return sabado;
 		}
 
-		public void setSabado(String sabado) {
+		public void setSabado(boolean sabado) {
 			this.sabado = sabado;
 		}
 
-		public String getDomingo() {
+		public boolean isDomingo() {
 			return domingo;
 		}
 
-		public void setDomingo(String domingo) {
+		public void setDomingo(boolean domingo) {
 			this.domingo = domingo;
 		}
 
@@ -97,6 +97,8 @@ public class HorarioTrabajo implements Serializable{
 					+ ", jueves=" + jueves + ", viernes=" + viernes + ", sabado=" + sabado + ", domingo=" + domingo
 					+ "]";
 		}
+
+	
 
 	 
 }
