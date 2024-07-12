@@ -4,5 +4,6 @@ import frgp.utn.edu.ar.entidad.HorarioTrabajo;
 
 public interface IdaoHorarioTrabajo {
 	public HorarioTrabajo readOne(int id);
+	public boolean update(HorarioTrabajo horarioTrabajo);
 
 }

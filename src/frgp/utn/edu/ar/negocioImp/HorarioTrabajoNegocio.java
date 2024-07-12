@@ -18,7 +18,9 @@ public class HorarioTrabajoNegocio implements IHorarioTrabajo{
 	public void setDaoHorarioTrabajo(IdaoHorarioTrabajo daoHorarioTrabajo) {
 		this.daoHorarioTrabajo = daoHorarioTrabajo;
 	}
-
+	public boolean update(HorarioTrabajo horarioTrabajo) {
+		return daoHorarioTrabajo.update(horarioTrabajo);
+	}
 	public HorarioTrabajo readOne(int id) {
 		return daoHorarioTrabajo.readOne(id);
 	}

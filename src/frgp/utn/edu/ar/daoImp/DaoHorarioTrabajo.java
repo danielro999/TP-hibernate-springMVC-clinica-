@@ -4,6 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import frgp.utn.edu.ar.dao.IdaoHorarioTrabajo;
 import frgp.utn.edu.ar.entidad.HorarioTrabajo;
+import frgp.utn.edu.ar.entidad.Medico;
 
 
 public class DaoHorarioTrabajo implements IdaoHorarioTrabajo {
@@ -34,5 +35,40 @@ public class DaoHorarioTrabajo implements IdaoHorarioTrabajo {
         return horariosTrabajo;
 	}
 
+    public boolean update(HorarioTrabajo horarioTrabajo) {
+        boolean estado = true;
+        Session session = null;
+
+        try {
+            session = conexion.abrirConexion();
+            session.beginTransaction();
+
+            // Guardar el objeto
+            session.merge(horarioTrabajo);
+
+            // Forzar la sincronización de la sesión con la base de datos
+            session.flush();
+
+            // Confirmar la transacción
+            session.getTransaction().commit();
+
+            // Verificar si el objeto se agregó a la base de datos
+            HorarioTrabajo savedHorarioTrabajo = (HorarioTrabajo) session.get(HorarioTrabajo.class, horarioTrabajo.getId());
+
+            if (!savedHorarioTrabajo.equals(horarioTrabajo)) {
+                estado = false;
+            }
+        } catch (Exception e) {
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+        	session.close();
+        }
+        return estado;
+    }
+
+    
 	
 }
