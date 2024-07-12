@@ -1,10 +1,8 @@
 package frgp.utn.edu.ar.controller;
 
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,9 +17,7 @@ import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 
 @Controller
 public class HorarioTrabajoController {
-	
-	
-	
+
 	@RequestMapping(value="irAltaHorarios.html")
 	public ModelAndView irAltaHorario (@RequestParam("id") int legajo) {
         ModelAndView mav = new ModelAndView();
@@ -31,7 +27,9 @@ public class HorarioTrabajoController {
         
         List<HorarioTrabajo> horariosTrabajo = new ArrayList<HorarioTrabajo>();
         horariosTrabajo	= medico.getListaHorarioTrabajo();
-       
+       for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
+		System.out.println(horariosTrabajo);
+	}
 //        Map<String, Boolean> horarios =  new HashMap<>();
 //        int cont = 9;
 //        for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
@@ -51,10 +49,57 @@ public class HorarioTrabajoController {
         mav.addObject("horarios", horariosTrabajo);
         mav.addObject("medico", medico);
         mav.setViewName("alta_horario");
-        
+        ((ClassPathXmlApplicationContext) appContext).close();
         return mav;
 	}
 	
-	
+
+
+	@RequestMapping(value="altaHorarios.html")
+	public ModelAndView altaHorario(@RequestParam("horarios") String horariosStr,int legajo)  {
+		ModelAndView mv = new ModelAndView();
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
+
+        List<Boolean> horarios = new ArrayList<>();
+        
+        if (horariosStr != null && !horariosStr.isEmpty()) {
+            String[] valores = horariosStr.split(",");
+            for (String valor : valores) {
+                horarios.add("1".equals(valor));
+            }
+        }
+        System.out.println(horarios.size());
+   
+		List <HorarioTrabajo> listaHorarioTrabajo = new ArrayList<HorarioTrabajo>();
+		
+		int cont=0;
+		for (int i = 0; i < 14; i++) {
+			HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			horarioMedico1.setLunes(horarios.get(cont));
+			horarioMedico1.setMartes(horarios.get(cont++));
+			horarioMedico1.setMiercoles(horarios.get(cont++));
+			horarioMedico1.setJueves(horarios.get(cont++));
+			horarioMedico1.setViernes(horarios.get(cont++));
+			horarioMedico1.setSabado(horarios.get(cont++));
+			horarioMedico1.setDomingo(horarios.get(cont++));
+			cont++;
+			listaHorarioTrabajo.add(horarioMedico1);
+		}
+		
+		for (HorarioTrabajo medicoNegocio : listaHorarioTrabajo) {
+			System.out.println("controller: " + medicoNegocio);
+		}
+		
+        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
+        Medico medico = medicoNegocio.readOne(legajo);
+        medico.setListaHorarioTrabajo(listaHorarioTrabajo);
+        medicoNegocio.update(medico);
+        
+        ((ClassPathXmlApplicationContext) appContext).close();
+		mv.addObject("id", legajo);
+		mv.setViewName("redirect:/irAltaHorarios.html");
+		return mv;
+		
+	}
 
 }

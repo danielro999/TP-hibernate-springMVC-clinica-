@@ -54,7 +54,7 @@
 						<td>${medico.estado}</td>
 						<td>
 							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+								<c:if test="${usuarioLogin.isAdmin()}">
 									<li class="list-inline-item"><a
 									href="irmodificarMedico.html?id=${medico.legajo}"
 									class="btn btn-warning btn-sm">Modificar</a></li>
@@ -63,7 +63,7 @@
 						</td>
 						<td>
 							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+								<c:if test="${usuarioLogin.isAdmin()}">
 									<li class="list-inline-item"><a
 										href="eliminarMedico.html?id=${medico.legajo}"
 										class="btn btn-danger btn-sm"
@@ -74,7 +74,7 @@
 						</td>
 						<td>
 							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+								<c:if test="${usuarioLogin.isAdmin()}">
 									<li class="list-inline-item"><a
 										href="irAltaHorarios.html?id=${medico.legajo}"
 										class="btn btn-warning  btn-sm">Horarios</a>

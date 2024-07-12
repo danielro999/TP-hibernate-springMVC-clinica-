@@ -17,6 +17,7 @@ import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.negocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.negocioImp.EspecialidadNegocio;
+import frgp.utn.edu.ar.negocioImp.HorarioTrabajoNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.entidad.Paciente;
 import frgp.utn.edu.ar.entidad.Turno;
@@ -339,13 +340,8 @@ public class Main {
 		turno2.setEstado("Confirmado");
 		turno2.setMedico(medico2);
 
-//		TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
-//		boolean boolTurno1 = turnoNegocio.add(turno1);
-//		boolean boolTurno2 = turnoNegocio.add(turno2);
-//
-//		System.out.println("\n ----- turnos -----");
-//		List<Turno> listaTurno = turnoNegocio.readAll();
-//		listaTurno.forEach(System.out::println);
+		HorarioTrabajoNegocio horarioTrabajoNegocio = (HorarioTrabajoNegocio) appContext.getBean("beanHorarioTrabajoNegocio");
+		System.out.println(horarioTrabajoNegocio.readOne(1));
 
 		((ClassPathXmlApplicationContext) appContext).close();
 
