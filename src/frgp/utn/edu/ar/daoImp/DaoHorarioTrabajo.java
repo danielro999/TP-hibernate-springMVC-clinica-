@@ -26,7 +26,6 @@ public class DaoHorarioTrabajo implements IdaoHorarioTrabajo {
 	public HorarioTrabajo readOne(int id) {
 		Session session = conexion.abrirConexion();
         session.beginTransaction();
-       System.out.println(id);
         String hql = "FROM HorarioTrabajo WHERE id = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);

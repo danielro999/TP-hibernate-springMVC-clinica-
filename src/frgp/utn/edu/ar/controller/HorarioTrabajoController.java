@@ -2,6 +2,7 @@ package frgp.utn.edu.ar.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import frgp.utn.edu.ar.entidad.HorarioTrabajo;
 import frgp.utn.edu.ar.entidad.Medico;
+import frgp.utn.edu.ar.negocioImp.HorarioTrabajoNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 
 @Controller
@@ -27,9 +29,9 @@ public class HorarioTrabajoController {
         
         List<HorarioTrabajo> horariosTrabajo = new ArrayList<HorarioTrabajo>();
         horariosTrabajo	= medico.getListaHorarioTrabajo();
-       for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
-		System.out.println(horariosTrabajo);
-	}
+//       for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
+//		System.out.println(horarioTrabajo);
+//	}
 //        Map<String, Boolean> horarios =  new HashMap<>();
 //        int cont = 9;
 //        for (HorarioTrabajo horarioTrabajo : horariosTrabajo) {
@@ -59,42 +61,39 @@ public class HorarioTrabajoController {
 	public ModelAndView altaHorario(@RequestParam("horarios") String horariosStr,int legajo)  {
 		ModelAndView mv = new ModelAndView();
         ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
-
-        List<Boolean> horarios = new ArrayList<>();
-        
+		HorarioTrabajoNegocio horarioTrabajoNegocio = (HorarioTrabajoNegocio) appContext.getBean("beanHorarioTrabajoNegocio");
+		MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
+		Medico medico = medicoNegocio.readOne(legajo);
+		int IdInicialHoracios= medico.getListaHorarioTrabajo().get(0).getId();
+       
+		List<Boolean> horarios = new ArrayList<>();
+		String[] valores = null;
         if (horariosStr != null && !horariosStr.isEmpty()) {
-            String[] valores = horariosStr.split(",");
+            valores = horariosStr.split(",");
+            System.out.println(Arrays.toString(valores));
+
             for (String valor : valores) {
                 horarios.add("1".equals(valor));
             }
+            System.out.println(Arrays.toString(valores));
         }
-        System.out.println(horarios.size());
-   
-		List <HorarioTrabajo> listaHorarioTrabajo = new ArrayList<HorarioTrabajo>();
-		
+
 		int cont=0;
 		for (int i = 0; i < 14; i++) {
-			HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			
+			HorarioTrabajo horarioMedico1 = horarioTrabajoNegocio.readOne(IdInicialHoracios);
 			horarioMedico1.setLunes(horarios.get(cont));
-			horarioMedico1.setMartes(horarios.get(cont++));
-			horarioMedico1.setMiercoles(horarios.get(cont++));
-			horarioMedico1.setJueves(horarios.get(cont++));
-			horarioMedico1.setViernes(horarios.get(cont++));
-			horarioMedico1.setSabado(horarios.get(cont++));
-			horarioMedico1.setDomingo(horarios.get(cont++));
+			horarioMedico1.setMartes(horarios.get(++cont));
+			horarioMedico1.setMiercoles(horarios.get(++cont));
+			horarioMedico1.setJueves(horarios.get(++cont));
+			horarioMedico1.setViernes(horarios.get(++cont));
+			horarioMedico1.setSabado(horarios.get(++cont));
+			horarioMedico1.setDomingo(horarios.get(++cont));
 			cont++;
-			listaHorarioTrabajo.add(horarioMedico1);
+			IdInicialHoracios++;
+			horarioTrabajoNegocio.update(horarioMedico1);	
 		}
 		
-		for (HorarioTrabajo medicoNegocio : listaHorarioTrabajo) {
-			System.out.println("controller: " + medicoNegocio);
-		}
-		
-        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
-        Medico medico = medicoNegocio.readOne(legajo);
-        medico.setListaHorarioTrabajo(listaHorarioTrabajo);
-        medicoNegocio.update(medico);
-        
         ((ClassPathXmlApplicationContext) appContext).close();
 		mv.addObject("id", legajo);
 		mv.setViewName("redirect:/irAltaHorarios.html");

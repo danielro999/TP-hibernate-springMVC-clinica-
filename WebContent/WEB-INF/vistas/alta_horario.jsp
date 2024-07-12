@@ -25,39 +25,54 @@ th {
 	flex-direction: column;
 }
 </style>
-  <script>
-        function gatherCheckboxes() {
-            var horarios = [];
-          /*   var dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
-            for (var i = 0; i < dias.length; i++) {
-                for (var hour = 9; hour <= 22; hour++) {
-                    var checkbox = document.getElementsByName(dias[i] + hour)[0];
-                    horarios.push(checkbox.checked ? "0" : "1");
-                }
-             } */
-             for (var hour = 9; hour <= 22; hour++) {
-            	 horarios.push(document.getElementsByName("lunes" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("martes" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("miercoles" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("jueves" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("viernes" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("sabado" + hour)[0].checked ? "0" : "1");
-            	 horarios.push(document.getElementsByName("domingo" + hour)[0].checked ? "0" : "1");
-             }
-             
-            document.getElementById("horarios").value = horarios.join(",");
-      		console.log( document.getElementById("horarios").value);
+<script>
+	function gatherCheckboxes() {
+		var horarios = [];
+		/*   var dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"];
+		  for (var i = 0; i < dias.length; i++) {
+		      for (var hour = 9; hour <= 22; hour++) {
+		          var checkbox = document.getElementsByName(dias[i] + hour)[0];
+		          horarios.push(checkbox.checked ? "0" : "1");
+		      }
+		   } */
+		for (var hour = 9; hour <= 22; hour++) {
+			horarios
+					.push(document.getElementsByName("lunes" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("martes" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("miercoles" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("jueves" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("viernes" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("sabado" + hour)[0].checked ? "0"
+							: "1");
+			horarios
+					.push(document.getElementsByName("domingo" + hour)[0].checked ? "0"
+							: "1");
+		}
 
-            return true;
-        }
-    </script>
+		document.getElementById("horarios").value = horarios.join(",");
+		window.alert(document.getElementById("horarios").value);
+
+		return true;
+	}
+</script>
 </head>
 <body>
 	<h3>Legajo numero: ${medico.legajo}</h3>
 	<h2>Alta de Horario de Trabajo</h2>
 
 
-	<form id="horarioForm" action="altaHorarios.html" method="post" onsubmit="return gatherCheckboxes();">
+	<form id="horarioForm" action="altaHorarios.html" method="post"
+		onsubmit="return gatherCheckboxes();">
 		<table>
 			<thead>
 				<tr>
@@ -118,12 +133,11 @@ th {
 			</tbody>
 
 		</table>
-		<br>
-		<input type="submit" value="Guardar Horario">
-		<input type="hidden" id="legajo" name="legajo" value="${medico.legajo}">
-		<input type="hidden" name="horarios" id="horarios"/> 
+		<br> <input type="submit" value="Guardar Horario"> <input
+			type="hidden" id="legajo" name="legajo" value="${medico.legajo}">
+		<input type="hidden" name="horarios" id="horarios" />
 	</form>
-<%-- 					<%
+	<%-- 					<%
 	
 		List<String> listaHorasTrabajo = new ArrayList<String>();
 		for (int i = 9; i < 23; i++) {

@@ -347,19 +347,20 @@ public class Main {
 		HorarioTrabajo horarioMedico4 = horarioTrabajoNegocio.readOne(237);
 		//for (int i = 0; i < 14; i++) {
 			horarioMedico4.setLunes(true);
-			horarioMedico4.setMartes(true);
-			horarioMedico4.setMiercoles(true);
-			horarioMedico4.setJueves(true);
-			horarioMedico4.setViernes(true);
-			horarioMedico4.setSabado(true);
-			horarioMedico4.setDomingo(true);
+			horarioMedico4.setMartes(false);
+			horarioMedico4.setMiercoles(false);
+			horarioMedico4.setJueves(false);
+			horarioMedico4.setViernes(false);
+			horarioMedico4.setSabado(false);
+			horarioMedico4.setDomingo(false);
 
 			//horariosMedico2.add(horarioMedico4);
 //	}
 		
 		horarioTrabajoNegocio.update(horarioMedico4);
 		System.out.println(horarioTrabajoNegocio.readOne(237));
-
+		Medico medico56 = medicoNegocio.readOne(1);
+		System.out.println(medico56.getListaHorarioTrabajo());
 		((ClassPathXmlApplicationContext) appContext).close();
 
 	}
