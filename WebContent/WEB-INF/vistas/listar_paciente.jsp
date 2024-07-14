@@ -33,7 +33,10 @@
 					<th scope="col">Provincia</th>
 					<th scope="col">Teléfono</th>
 					<th scope="col">DNI</th>
-					<th scope="col">Modificar - Eliminar</th>
+					<c:if test="${usuarioLogin.isAdmin()}">
+						<th scope="col">Modificar</th>
+						<th scope="col">Eliminar</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -50,18 +53,19 @@
 						<td>${paciente.provincia}</td>
 						<td>${paciente.telefono}</td>
 						<td>${paciente.dni}</td>
-						<td>
-							<ul class="list-inline m-0">
-								<li class="list-inline-item"><a
+						<c:if test="${usuarioLogin.isAdmin()}">
+							<td>
+								<a
 									href="irmodificarPaciente.html?id=${paciente.id}"
-									class="btn btn-warning btn-sm">Modificar</a></li>
-								<li class="list-inline-item"><a
+									class="btn btn-warning btn-sm">Modificar</a>
+							</td>
+							<td>		
+								<a
 									href="eliminarPaciente.html?id=${paciente.id}"
 									class="btn btn-danger btn-sm"
 									onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
-								</li> 
-							</ul>
-						</td>
+							</td>	
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -8,8 +8,9 @@
     <title>Alta de Médico</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body style="background-color: white;">
-    <div class="container mt-5">
+<body >
+	<%@ include file="encabezado.jsp"%>
+    <div class="container mt-5" style="width: 500px;">
         <h2 class="mb-4">Alta de Médico</h2>
         <form id="altaMedicoForm" action="altaMedico.html" method="post">
            <div class="form-group">
@@ -48,8 +49,13 @@
 					name="fechaNacimiento" required>
 			</div>
 			<div class="form-group">
-				<label for="localidad">Localidad</label> <input type="text"
-					class="form-control" id="localidad" name="localidad" required>
+				<label for="localidad">Localidad</label>
+                <select class="form-control" id="localidad" name="localidad" required>
+                    <option value="">Seleccione una localidad</option>
+                    <option value="La Plata">La Plata</option>
+                    <option value="Mar del Plata">Mar del Plata</option>
+                    <option value="Bahía Blanca">Bahía Blanca</option>
+                </select>
 			</div>
 
 			<div class="form-group">

@@ -9,12 +9,13 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color: white;">
-    <div class="container mt-5">
+	<%@ include file="encabezado.jsp"%>
+    <div class="container mt-5" style="width: 500px;" >
         <h2 class="mb-4">Alta de Turno</h2>
         <form action="altaTurno.html" method="post">
             <div class="form-group">
                 <label for="Legajo">Médico:</label>
-                <select class="form-control" id="Legajo" name="Legajo">
+                <select class="form-control" id="Legajo" name="Legajo" required>
                     <c:forEach var="medico" items="${medicos}">
                         <option value="${medico.legajo}">${medico.nombre} ${medico.apellido}</option>
                     </c:forEach>
@@ -22,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="pacienteId">Paciente:</label>
-                <select class="form-control" id="pacienteId" name="pacienteId">
+                <select class="form-control" id="pacienteId" name="pacienteId" required>
                     <c:forEach var="paciente" items="${pacientes}">
                         <option value="${paciente.id}">${paciente.nombre} ${paciente.apellido}</option>
                     </c:forEach>
@@ -30,11 +31,11 @@
             </div>
             <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha"/>
+                <input type="date" class="form-control" id="fecha" name="fecha" required/>
             </div>
             <div class="form-group">
-                <label for="hora">Hora:</label>
-                <input type="time" class="form-control" id="hora" name="hora"/>
+                <label for="hora">Hora: de 09 a 22 hs</label>
+                <input type="number"  min="09" max="22" class="form-control" id="hora" name="hora" required/>
             </div>
             <div class="form-group">
                 <label for="observacion">Observación:</label>
@@ -42,7 +43,7 @@
             </div>
              <div class="form-group">
                 <label for="estado">Estado:</label>
-                <select class="form-control" id="estado" name="estado">
+                <select class="form-control" id="estado" name="estado" required>
                     <option value="pendiente">Pendiente</option>
                     <option value="presente">Presente</option>
                     <option value="ausente">Ausente</option>

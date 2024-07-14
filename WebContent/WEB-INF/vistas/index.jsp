@@ -13,13 +13,11 @@
 <title>Clinica</title>
 </head>
 <body>
-
 	<%@ include file="encabezado.jsp"%>
-
-
 	<div class="container mt-5">
-		<h1 class="mb-4">Página de Prueba Clínica Web</h1>
+		<h1 class="mb-4">Clínica Web</h1>
 		<div class="row">
+		  <c:if test="${usuarioLogin.isAdmin()}">
 			<div class="col-md-4 mb-3">
 				<a href="cargaMedico.html" class="btn btn-primary btn-block">Alta
 					Médicos</a>
@@ -28,20 +26,23 @@
 				<a href="CargaPaciente.html" class="btn btn-primary btn-block">Alta
 					Pacientes</a>
 			</div>
-			<div class="col-md-4 mb-3">
-				<form action="cargaTurno.html" method="post">
-					<button type="submit" class="btn btn-primary btn-block">Alta turno</button>
-					<div class="form-group">
-						<label for="especialidad">Especialidad:</label> <select
-							class="form-control" id="especialidad" name="especialidad">
-							<c:forEach var="especialidad" items="${especialidades}">
-								<option value="${especialidad.id}">${especialidad.nombre}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<!-- Otros campos del formulario -->
-				</form>
-			</div>
+			  </c:if>
+			<c:if test="${usuarioLogin.isEstado()}">
+				<div class="col-md-4 mb-3">
+					<form action="cargaTurno.html" method="post">
+						<button type="submit" class="btn btn-primary btn-block">Alta
+							turno</button>
+						<div class="form-group">
+							<label for="especialidad">Especialidad:</label> <select
+								class="form-control" id="especialidad" name="especialidad">
+								<c:forEach var="especialidad" items="${especialidades}">
+									<option value="${especialidad.id}">${especialidad.nombre}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</form>
+				</div>
+			</c:if>
 		</div>
 	</div>
 

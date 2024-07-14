@@ -37,9 +37,9 @@
                 <label for="fecha">Fecha:</label>
                 <input type="date" class="form-control" id="fecha" name="fecha" value="${turno.fecha}" required/>
             </div>
-            <div class="form-group">
-                <label for="hora">Hora:</label>
-                <input type="time" class="form-control" id="hora" name="hora" value="${turno.hora}" required/>
+           <div class="form-group">
+                <label for="hora">Hora: de 09 a 22 hs</label>
+                <input type="number"  min="09" max="22" class="form-control" id="hora" name="hora" required/>
             </div>
             <div class="form-group">
                 <label for="observacion">Observación:</label>

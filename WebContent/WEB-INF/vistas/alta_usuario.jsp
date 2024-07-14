@@ -8,6 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color: white;">
+	<%@ include file="encabezado.jsp"%>
     <div class="container mt-5">
         <h2 class="mb-4">Alta de Usuario ${medico.nombre} ${medico.apellido}</h2>
         <form action="altaUsuario.html" method="post">

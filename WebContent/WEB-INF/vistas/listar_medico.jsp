@@ -33,9 +33,11 @@
 					<th scope="col">Fecha de Nacimiento</th>
 					<th scope="col">Sexo</th>
 					<th scope="col">Estado</th>
-					<th scope="col">Modificar</th>
-					<th scope="col">Eliminar</th>
-					<th scope="col">Horarios</th>
+                    <c:if test="${usuarioLogin.isAdmin()}">
+						<th scope="col">Modificar</th>
+						<th scope="col">Eliminar</th>
+					    <th scope="col">Horarios</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,69 +54,54 @@
 						<td>${medico.fechaNacimiento}</td>
 						<td>${medico.sexo}</td>
 						<td>${medico.estado}</td>
-						<td>
-							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isAdmin()}">
-									<li class="list-inline-item"><a
-									href="irmodificarMedico.html?id=${medico.legajo}"
-									class="btn btn-warning btn-sm">Modificar</a></li>
-								</c:if>
-							</ul>
-						</td>
-						<td>
-							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isAdmin()}">
-									<li class="list-inline-item"><a
-										href="eliminarMedico.html?id=${medico.legajo}"
-										class="btn btn-danger btn-sm"
-										onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
-									</li>
-								</c:if>
-							</ul>
-						</td>
-						<td>
-							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isAdmin()}">
-									<li class="list-inline-item"><a
-										href="irAltaHorarios.html?id=${medico.legajo}"
-										class="btn btn-warning  btn-sm">Horarios</a>
-									</li>
-								</c:if>
-							</ul>
-						</td>
+						<c:if test="${usuarioLogin.isAdmin()}">
+							<td><a href="irmodificarMedico.html?id=${medico.legajo}"
+								class="btn btn-warning btn-sm">Modificar</a></td>
+							<td><a href="eliminarMedico.html?id=${medico.legajo}"
+								class="btn btn-danger btn-sm"
+								onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
+							</td>
+							<td><a href="irAltaHorarios.html?id=${medico.legajo}"
+								class="btn btn-warning  btn-sm">Horarios</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<script>
-	$(document).ready( function () {
-$('#tableMedicos').DataTable({
-    "language":{
-    	"sProcessing":     "Procesando...",
-    	"sLengthMenu":     "Mostrar _MENU_ registros",
-    	"sZeroRecords":    "No se encontraron resultados",
-    	"sEmptyTable":     "Ningún dato disponible en esta tabla",
-    	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-    	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-    	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-    	"sInfoPostFix":    "",
-    	"sSearch":         "Buscar:",
-    	"sUrl":            "",
-    	"sInfoThousands":  ",",
-    	"sLoadingRecords": "Cargando...",
-    	"oPaginate": {
-    		"sFirst":    "Primero",
-    		"sLast":     "Último",
-    		"sNext":     "Siguiente",
-    		"sPrevious": "Anterior"
-    	},
-    	"oAria": {
-    		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-    		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    	}}
-    });
-  });
-</script>
+		$(document)
+				.ready(
+						function() {
+							$('#tableMedicos')
+									.DataTable(
+											{
+												"language" : {
+													"sProcessing" : "Procesando...",
+													"sLengthMenu" : "Mostrar _MENU_ registros",
+													"sZeroRecords" : "No se encontraron resultados",
+													"sEmptyTable" : "Ningún dato disponible en esta tabla",
+													"sInfo" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+													"sInfoEmpty" : "Mostrando registros del 0 al 0 de un total de 0 registros",
+													"sInfoFiltered" : "(filtrado de un total de _MAX_ registros)",
+													"sInfoPostFix" : "",
+													"sSearch" : "Buscar:",
+													"sUrl" : "",
+													"sInfoThousands" : ",",
+													"sLoadingRecords" : "Cargando...",
+													"oPaginate" : {
+														"sFirst" : "Primero",
+														"sLast" : "Último",
+														"sNext" : "Siguiente",
+														"sPrevious" : "Anterior"
+													},
+													"oAria" : {
+														"sSortAscending" : ": Activar para ordenar la columna de manera ascendente",
+														"sSortDescending" : ": Activar para ordenar la columna de manera descendente"
+													}
+												}
+											});
+						});
+	</script>
 </body>
 </html>
