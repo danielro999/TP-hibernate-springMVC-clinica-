@@ -1,11 +1,16 @@
 package frgp.utn.edu.ar.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import frgp.utn.edu.ar.entidad.HorarioTrabajo;
 import frgp.utn.edu.ar.entidad.Medico;
 import frgp.utn.edu.ar.negocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
@@ -65,7 +70,22 @@ public class MedicoController {
 		medico.setTelefono(telefono);
 		medico.setEspecialidad(especialidadNegocio.readOne(especialidad));
 		
-		medicoNegocio.add(medico);
+		
+	List <HorarioTrabajo> listaHorasDias = new ArrayList<HorarioTrabajo>();	
+	for (int i = 0; i < 14; i++) {
+			HorarioTrabajo horarioMedico = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			horarioMedico.setLunes(false);
+			horarioMedico.setMartes(false);
+			horarioMedico.setMiercoles(false);
+			horarioMedico.setJueves(false);
+			horarioMedico.setViernes(false);
+			horarioMedico.setSabado(false);
+			horarioMedico.setDomingo(false);
+			
+			listaHorasDias.add(horarioMedico);
+	}
+	medico.setListaHorarioTrabajo(listaHorasDias);
+	medicoNegocio.add(medico);
 		
 		((ClassPathXmlApplicationContext) appContext).close();
 		mav.setViewName("index");

@@ -67,7 +67,7 @@
 
 	  // This arrangement can be altered based on how we want the date's format to appear.
 	
-	  console.log(formattedDate); // "17-6-2022"
+	  console.log(formattedDate); // "17-06-2022"
 
 	  document.getElementById("fecha").setAttribute("min", formattedDate);
 	</script>
