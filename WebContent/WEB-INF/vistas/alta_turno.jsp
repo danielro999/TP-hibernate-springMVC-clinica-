@@ -56,5 +56,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+	  // Get current date and time
+	  var date  = new Date();
+	  let day = date.getDate();
+	  let month = date.getMonth()+1;
+	  let year = date.getFullYear();
+	  const formattedDate = year +"-"+ String(month).padStart(2, '0')+"-"+ String(day).padStart(2, '0'); 
+	  //const formattedDate = day +"-"+month+"-"+year;
+
+	  // This arrangement can be altered based on how we want the date's format to appear.
+	
+	  console.log(formattedDate); // "17-6-2022"
+
+	  document.getElementById("fecha").setAttribute("min", formattedDate);
+	</script>
+    
 </body>
 </html>
