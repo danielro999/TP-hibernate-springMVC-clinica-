@@ -17,6 +17,7 @@ import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.negocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.negocioImp.EspecialidadNegocio;
+import frgp.utn.edu.ar.negocioImp.HorarioTrabajoNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
 import frgp.utn.edu.ar.entidad.Paciente;
 import frgp.utn.edu.ar.entidad.Turno;
@@ -213,23 +214,37 @@ public class Main {
 
 		/* Horario medico */
 
-		List <HorarioTrabajo> horariosMedico1 = new ArrayList<HorarioTrabajo>();
+		List <HorarioTrabajo> ListaHorasDias = new ArrayList<HorarioTrabajo>();
+		List <HorarioTrabajo> ListaHorasDias2 = new ArrayList<HorarioTrabajo>();
+
 			
-		for (int i = 0; i < 6; i++) {
-				HorarioTrabajo horarioMedico1 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-				horarioMedico1.setDia("lunes");
-				horarioMedico1.setHorario(String.valueOf(11+i));
-				horariosMedico1.add(horarioMedico1);
+		for (int i = 0; i < 14; i++) {
+				HorarioTrabajo horarioMedico = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+				horarioMedico.setLunes(false);
+				horarioMedico.setMartes(false);
+				horarioMedico.setMiercoles(false);
+				horarioMedico.setJueves(false);
+				horarioMedico.setViernes(false);
+				horarioMedico.setSabado(false);
+				horarioMedico.setDomingo(false);
+				
+				ListaHorasDias.add(horarioMedico);
 		}
-
-		HorarioTrabajo horarioMedico2 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico2.setDia("jueves");
-		horarioMedico2.setHorario("13:00-1600");
-
-		HorarioTrabajo horarioMedico3 = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
-		horarioMedico3.setDia("lunes");
-		horarioMedico3.setHorario("13:00-1600");
-
+		
+		for (int i = 0; i < 14; i++) {
+			HorarioTrabajo horarioMedico = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+			horarioMedico.setLunes(false);
+			horarioMedico.setMartes(false);
+			horarioMedico.setMiercoles(false);
+			horarioMedico.setJueves(false);
+			horarioMedico.setViernes(false);
+			horarioMedico.setSabado(false);
+			horarioMedico.setDomingo(false);
+			
+			ListaHorasDias2.add(horarioMedico);
+	}
+	
+		
 		/* Medico */
 
 		Medico medico1 = (Medico) appContext.getBean("beanMedico");
@@ -241,7 +256,7 @@ public class Main {
 		medico1.setFechaNacimiento("2000-01-02");
 		medico1.setLocalidad("virreyes");
 		medico1.setEspecialidad(especialidad1);
-		medico1.setHorarioTrabajo(horariosMedico1);
+		medico1.setListaHorarioTrabajo(ListaHorasDias);
 		medico1.setUsuario(usuario1);
 		medico1.setEstado(true);
 
@@ -253,10 +268,8 @@ public class Main {
 		medico2.setDireccion("garibal 232");
 		medico2.setEspecialidad(especialidad2);
 		medico2.setFechaNacimiento("2000-01-02");
-		medico1.setLocalidad("garin");
-		/* medico2.addHorario(horarioMedico1); */ // error de key duplicada
-		medico2.addHorario(horarioMedico2);
-		medico2.addHorario(horarioMedico3);
+		medico2.setLocalidad("garin");
+		medico2.setListaHorarioTrabajo(ListaHorasDias2); 
 		medico2.setUsuario(usuario2);
 		medico2.setEstado(true);
 
@@ -265,13 +278,27 @@ public class Main {
 		medicoNegocio.add(medico2);
 
 		Random rand = new Random();
+		
 		List<Medico> medicos = new ArrayList<>();
+		
 		for (int i = 0; i < 15; i++) {
 			Usuario usuario = usuarios.get(i);
 			Especialidad especialidad = especialidades.get(rand.nextInt(especialidades.size()));
-
 			Medico medico = (Medico) appContext.getBean("beanMedico");
-
+			ListaHorasDias = new ArrayList<HorarioTrabajo>();
+			for (int j = 0; j < 14; j++) {
+				HorarioTrabajo horarioMedico = (HorarioTrabajo) appContext.getBean("beanHorarioTrabajo");
+				horarioMedico.setLunes(false);
+				horarioMedico.setMartes(false);
+				horarioMedico.setMiercoles(false);
+				horarioMedico.setJueves(false);
+				horarioMedico.setViernes(false);
+				horarioMedico.setSabado(false);
+				horarioMedico.setDomingo(false);
+				
+				ListaHorasDias.add(horarioMedico);
+			}
+		
 			medico.setNombre("Nombre" + (i + 1));
 			medico.setApellido("Apellido" + (i + 1));
 			medico.setCorreoElectronico("correo" + (i + 1) + "@ejemplo.com");
@@ -283,7 +310,7 @@ public class Main {
 			medico.setFechaNacimiento("1990-01-01");
 			medico.setUsuario(usuario);
 			medico.setEspecialidad(especialidad);
-
+			medico.setListaHorarioTrabajo(ListaHorasDias);
 			medicos.add(medico);
 			medicoNegocio.add(medico);
 		}
@@ -313,14 +340,27 @@ public class Main {
 		turno2.setEstado("Confirmado");
 		turno2.setMedico(medico2);
 
-//		TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
-//		boolean boolTurno1 = turnoNegocio.add(turno1);
-//		boolean boolTurno2 = turnoNegocio.add(turno2);
-//
-//		System.out.println("\n ----- turnos -----");
-//		List<Turno> listaTurno = turnoNegocio.readAll();
-//		listaTurno.forEach(System.out::println);
+		HorarioTrabajoNegocio horarioTrabajoNegocio = (HorarioTrabajoNegocio) appContext.getBean("beanHorarioTrabajoNegocio");
+		System.out.println(horarioTrabajoNegocio.readOne(237));
+		
+		//List <HorarioTrabajo> horariosMedico4 = new ArrayList<HorarioTrabajo>();
+		HorarioTrabajo horarioMedico4 = horarioTrabajoNegocio.readOne(237);
+		//for (int i = 0; i < 14; i++) {
+			horarioMedico4.setLunes(true);
+			horarioMedico4.setMartes(false);
+			horarioMedico4.setMiercoles(false);
+			horarioMedico4.setJueves(false);
+			horarioMedico4.setViernes(false);
+			horarioMedico4.setSabado(false);
+			horarioMedico4.setDomingo(false);
 
+			//horariosMedico2.add(horarioMedico4);
+//	}
+		
+		horarioTrabajoNegocio.update(horarioMedico4);
+		System.out.println(horarioTrabajoNegocio.readOne(237));
+		Medico medico56 = medicoNegocio.readOne(1);
+		System.out.println(medico56.getListaHorarioTrabajo());
 		((ClassPathXmlApplicationContext) appContext).close();
 
 	}

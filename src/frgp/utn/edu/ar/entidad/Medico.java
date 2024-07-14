@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.entidad;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,7 @@ import javax.persistence.CascadeType;
 		private Usuario usuario;
 			
 		@OneToMany(cascade= {CascadeType.ALL})
-		private List<HorarioTrabajo> listaHorarioTrabajo;
+		private List<HorarioTrabajo> listaHorarioTrabajo=new ArrayList<HorarioTrabajo>();
 		
 		private String nombre;
 		private String apellido;
@@ -79,15 +80,14 @@ import javax.persistence.CascadeType;
 			this.estado = estado;
 		}
 
+
 		public List<HorarioTrabajo> getListaHorarioTrabajo() {
 			return listaHorarioTrabajo;
 		}
 
-
 		public void setListaHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
 			this.listaHorarioTrabajo = listaHorarioTrabajo;
 		}
-
 
 		public boolean isEstado() {
 			return estado;
@@ -187,18 +187,6 @@ import javax.persistence.CascadeType;
 			this.telefono = telefono;
 		}
 			
-		
-		public List<HorarioTrabajo> getHorarioTrabajo() {
-			return listaHorarioTrabajo;
-		}
-
-		public void setHorarioTrabajo(List<HorarioTrabajo> listaHorarioTrabajo) {
-			this.listaHorarioTrabajo = listaHorarioTrabajo;
-		}
-		
-		public void addHorario(HorarioTrabajo HorarioTrabajo) {
-			this.listaHorarioTrabajo.add(HorarioTrabajo);
-		}
 
 		//met ToString()
 		
@@ -212,30 +200,10 @@ import javax.persistence.CascadeType;
 			if (especialidad != null) {
 				mensaje += ", especialidad= " + especialidad.getNombre();
 			}
-			for (HorarioTrabajo horarioTrabajo2 : this.listaHorarioTrabajo) {
-				mensaje += "\n      ," +horarioTrabajo2;
-			}
-			
+
 			return mensaje;
 		}
 		
-		
-		/*
-		 * @Override
-		public String toString() {
-			String mensaje = "Medico [legajo=" + legajo + ", nombre="
-					+ nombre + ", apellido=" + apellido + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
-					+ ", direccion=" + direccion + ", localidad=" + localidad + ", correoElectronico=" + correoElectronico
-					+ ", telefono=" + telefono + "]";
-			if (usuario != null) {
-				mensaje += ", usiario= " + usuario.getNombreUsuario();
-			}
-			if (especialidad != null) {
-				mensaje += ", especialidad= " + especialidad.getNombre();
-			}
-			return mensaje;
-		}
-		*/
 
 	}
 

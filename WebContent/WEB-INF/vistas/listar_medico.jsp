@@ -35,6 +35,7 @@
 					<th scope="col">Estado</th>
 					<th scope="col">Modificar</th>
 					<th scope="col">Eliminar</th>
+					<th scope="col">Horarios</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,7 +54,7 @@
 						<td>${medico.estado}</td>
 						<td>
 							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+								<c:if test="${usuarioLogin.isAdmin()}">
 									<li class="list-inline-item"><a
 									href="irmodificarMedico.html?id=${medico.legajo}"
 									class="btn btn-warning btn-sm">Modificar</a></li>
@@ -62,7 +63,7 @@
 						</td>
 						<td>
 							<ul class="list-inline m-0">
-								<c:if test="${usuarioLogin.isEstado() && usuarioLogin.getId() != 0}">
+								<c:if test="${usuarioLogin.isAdmin()}">
 									<li class="list-inline-item"><a
 										href="eliminarMedico.html?id=${medico.legajo}"
 										class="btn btn-danger btn-sm"
@@ -71,18 +72,16 @@
 								</c:if>
 							</ul>
 						</td>
-						<%-- <td>
+						<td>
 							<ul class="list-inline m-0">
-								<li class="list-inline-item"><a
-									href="irmodificarMedico.html?id=${medico.legajo}"
-									class="btn btn-warning btn-sm">Modificar</a></li>
-								<li class="list-inline-item"><a
-									href="eliminarMedico.html?id=${medico.legajo}"
-									class="btn btn-danger btn-sm"
-									onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');">Eliminar</a>
-								</li>
-							</ul> 
-						</td> --%>
+								<c:if test="${usuarioLogin.isAdmin()}">
+									<li class="list-inline-item"><a
+										href="irAltaHorarios.html?id=${medico.legajo}"
+										class="btn btn-warning  btn-sm">Horarios</a>
+									</li>
+								</c:if>
+							</ul>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,1 +1,3 @@
 /target/
+# sbteclipse plugin
+.target

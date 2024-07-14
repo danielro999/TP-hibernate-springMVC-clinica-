@@ -17,47 +17,96 @@ public class HorarioTrabajo implements Serializable{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
 		
-	    private String dia;
+	    private boolean lunes;
 	    
-	    private String horario;
+	    private boolean martes;
+	    
+	    private boolean miercoles;
+	    
+	    private boolean jueves;
+	    
+	    private boolean viernes;
+	    
+	    private boolean sabado;
+	    
+	    private boolean domingo;
 	    
 	    public HorarioTrabajo() {
 	
 	    }
-	    public HorarioTrabajo(String dia, String horario) {
-	        this.dia = dia;
-	        this.horario = horario;
-	    }
 
-	    public String getDia() {
-	        return dia;
-	    }
-
-	    public void setDia(String dia) {
-	        this.dia = dia;
-	    }
-
-	    public String getHorario() {
-	        return horario;
-	    }
-
-	    public void setHorario(String horario) {
-	        this.horario = horario;
-	    }
-	 /*   
-	    public Medico getMedico() {
-			return medico;
+		public int getId() {
+			return id;
 		}
 
-		public void setMedico(Medico medico) {
-			this.medico = medico;
+		public void setId(int id) {
+			this.id = id;
 		}
-*/
+
+		public boolean isLunes() {
+			return lunes;
+		}
+
+		public void setLunes(boolean lunes) {
+			this.lunes = lunes;
+		}
+
+		public boolean isMartes() {
+			return martes;
+		}
+
+		public void setMartes(boolean martes) {
+			this.martes = martes;
+		}
+
+		public boolean isMiercoles() {
+			return miercoles;
+		}
+
+		public void setMiercoles(boolean miercoles) {
+			this.miercoles = miercoles;
+		}
+
+		public boolean isJueves() {
+			return jueves;
+		}
+
+		public void setJueves(boolean jueves) {
+			this.jueves = jueves;
+		}
+
+		public boolean isViernes() {
+			return viernes;
+		}
+
+		public void setViernes(boolean viernes) {
+			this.viernes = viernes;
+		}
+
+		public boolean isSabado() {
+			return sabado;
+		}
+
+		public void setSabado(boolean sabado) {
+			this.sabado = sabado;
+		}
+
+		public boolean isDomingo() {
+			return domingo;
+		}
+
+		public void setDomingo(boolean domingo) {
+			this.domingo = domingo;
+		}
 
 		@Override
 		public String toString() {
-			return "Horario de trabajo [dia=" + dia + ", horario=" + horario + "]";
+			return "HorarioTrabajo [id=" + id + ", lunes=" + lunes + ", martes=" + martes + ", miercoles=" + miercoles
+					+ ", jueves=" + jueves + ", viernes=" + viernes + ", sabado=" + sabado + ", domingo=" + domingo
+					+ "]";
 		}
+
+	
 
 	 
 }

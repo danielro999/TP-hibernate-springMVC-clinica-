@@ -20,12 +20,22 @@
 	<bean id="beanHorarioTrabajo" class="frgp.utn.edu.ar.entidad.HorarioTrabajo"
 		scope="prototype">
 	</bean>
+	
+		<bean id="beanHorarioTrabajoNegocio" class="frgp.utn.edu.ar.negocioImp.HorarioTrabajoNegocio"
+		scope="singleton">
+		<property name="daoHorarioTrabajo" ref="beanDaoHorarioTrabajo" />
+	</bean>
+
+	<bean id="beanDaoHorarioTrabajo" class="frgp.utn.edu.ar.daoImp.DaoHorarioTrabajo"
+		scope="singleton">
+		<property name="conexion" ref="beanConexion"></property>
+	</bean>
 
 	<!-- Medico -->
 
 	<bean id="beanMedico" class="frgp.utn.edu.ar.entidad.Medico"
 		scope="prototype">
-		<property name="horarioTrabajo">
+		<property name="ListaHorarioTrabajo">
 			<list>
 			</list>
 		</property>
