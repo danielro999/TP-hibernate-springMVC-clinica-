@@ -1,5 +1,8 @@
 
 package frgp.utn.edu.ar.controller;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
+import frgp.utn.edu.ar.entidad.HorarioTrabajo;
 import frgp.utn.edu.ar.entidad.Medico;
 import frgp.utn.edu.ar.entidad.Paciente;
 import frgp.utn.edu.ar.entidad.Turno;
@@ -146,6 +150,83 @@ public class TurnoController {
 	     ((ClassPathXmlApplicationContext) appContext).close();
 	     return mav;
 	 }
+	 
+	 
+	 @RequestMapping("ir_diponibilidad.html")
+	    public ModelAndView irDiponibilidTurno( 
+	    		int legajo,
+	    		Long pacienteId,
+	    		String fecha,
+	    		String dia
+	    		) {
+	        ModelAndView mav = new ModelAndView();
+	        
+	        ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
+	        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
+	        PacienteNegocio pacienteNegocio = (PacienteNegocio) appContext.getBean("beanPacienteNegocio");
+	        TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
+	        Medico medico=  medicoNegocio.readOne(legajo);
+	        Paciente paciente= pacienteNegocio.readOne(pacienteId);
+	        
+	        List<Turno> turnos = turnoNegocio.traerMedicosPorLegajo(legajo);
+	     
+	        List<Integer> listaHoras = new ArrayList<>();
+	        
+	        for (Turno turno : turnos) {
+				if (turno.getFecha().equals(fecha)) {
+					listaHoras.add(Integer.valueOf(turno.getHora()));
+				}
+			}
+           
+	 /*       for (int i = 0; i < 14; i++) {
+				Turno turno = turnos.get(i);
+	        	if (turno.getFecha().equals(fecha) && turno.getHora().equals(Integer.toString(i+9))) {
+	        		listaFecha.add(false);
+	        	} 
+	        	else {
+	        		listaFecha.add(true);
+				}
+			}*/
+				        
+	        System.out.println(listaHoras);
+	        
+	        List<Boolean> horarios = new ArrayList<>();
+	        int cont = 9;
+	        for (HorarioTrabajo horario : medico.getListaHorarioTrabajo()) {
+	            boolean hora = listaHoras.contains(cont);
+	        	if (dia.equals("lunes")){
+	        		horarios.add(horario.isLunes() && !hora);
+	        	}
+	        	if (dia.equals("martes")){
+	        		horarios.add(horario.isMartes() && !hora);
+	        	}
+	        	if (dia.equals("miercoles")){
+	        		horarios.add(horario.isMiercoles() && !hora);
+	        	}
+	        	if (dia.equals("jueves")){
+	        		horarios.add(horario.isJueves() && !hora);
+	        	}
+	           	if (dia.equals("viernes")){
+	        		horarios.add(horario.isViernes() && !hora);
+	        	}
+	           	if (dia.equals("sabado")){
+	        		horarios.add(horario.isSabado() && !hora);
+	        	}
+	           	if (dia.equals("domingo")){
+	        		horarios.add(horario.isDomingo() && !hora);
+	        	}
+	           	cont++;
+			}
+            mav.addObject("medico", medico);
+            mav.addObject("paciente", paciente);
+            mav.addObject("fecha", fecha);
+            mav.addObject("ListaHorarios", horarios);
+            
+            mav.setViewName("alta_diponibilidad_turno");
+	     
+	        ((ClassPathXmlApplicationContext) appContext).close();
+	        return mav;
+	    }
 	 
 	 @RequestMapping("eliminarTurno.html")
 	 public ModelAndView eliminarTurno(@RequestParam("id") int id) {

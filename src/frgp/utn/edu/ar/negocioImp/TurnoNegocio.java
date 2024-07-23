@@ -43,6 +43,10 @@ public class TurnoNegocio implements ITurnoNegocio {
     public List<Turno> readAll() {
         return daoTurno.readAll();
     }
+    
+    public List<Turno> traerMedicosPorLegajo(int legajo){
+    	return daoTurno.traerMedicosPorLegajo(legajo);
+    }
 
     public boolean update(Turno turno) {
         return daoTurno.update(turno);

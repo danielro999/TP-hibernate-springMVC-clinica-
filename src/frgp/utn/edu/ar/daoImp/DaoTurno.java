@@ -1,9 +1,11 @@
 package frgp.utn.edu.ar.daoImp;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoTurno;
+import frgp.utn.edu.ar.entidad.HorarioTrabajo;
 import frgp.utn.edu.ar.entidad.Turno;
 
 
@@ -141,6 +143,18 @@ public class DaoTurno implements IdaoTurno{
 	        session.beginTransaction();
 	        List<Turno> turno = session.createQuery("FROM Turno").list();
 	        return turno;
+	    }
+	    
+	    public List<Turno> traerMedicosPorLegajo(int legajo) {
+	        Session session = conexion.abrirConexion();
+	        session.beginTransaction();
+	        
+	        String hql = "FROM Turno WHERE medico_id = :legajo";
+	        Query query = session.createQuery(hql);
+	        query.setParameter("legajo", legajo);
+	      
+	        List<Turno> turnos = (List<Turno>) query.list();
+	        return turnos;
 	    }
 
 	    // Agrego los getters y setters para Spring Core

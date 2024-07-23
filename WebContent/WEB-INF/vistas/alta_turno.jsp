@@ -12,10 +12,11 @@
 	<%@ include file="encabezado.jsp"%>
     <div class="container mt-5" style="width: 500px;" >
         <h2 class="mb-4">Alta de Turno</h2>
-        <form action="altaTurno.html" method="post">
+        
+        <form action="ir_diponibilidad.html" method="post">
             <div class="form-group">
                 <label for="Legajo">Médico:</label>
-                <select class="form-control" id="Legajo" name="Legajo" required>
+                <select class="form-control" id="Legajo" name="legajo" required>
                     <c:forEach var="medico" items="${medicos}">
                         <option value="${medico.legajo}">${medico.nombre} ${medico.apellido}</option>
                     </c:forEach>
@@ -30,31 +31,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="fecha">Dia:  <b id="dia"></b></label>
+                <label for="fecha">Dia:  <b id="diaText" ></b></label>
+                <input type="hidden" id="dia" name="dia">
                 <input type="date" class="form-control" id="fecha" name="fecha" onchange="handler(event);" required/>
             </div>
-           <!--  <div class="form-group">
-                <label for="hora">Hora: de 09 a 22 hs</label>
-                <input type="number"  min="09" max="22" class="form-control" id="hora" name="hora" required/>
-            </div> -->
-            <select class="form-control" id="hora" name="hora">
-	            <c:forEach var="horarioMedico" items="${medicos.get(0).listaHorarioTrabajo}">
-					<option value="">${horarioMedico.lunes}</option>
-				</c:forEach>
-            </select>
-            <div class="form-group">
-                <label for="observacion">Observación:</label>
-                <input type="text" class="form-control" id="observacion" name="observacion"/>
-            </div>
-             <div class="form-group">
-                <label for="estado">Estado:</label>
-                <select class="form-control" id="estado" name="estado" required>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="presente">Presente</option>
-                    <option value="ausente">Ausente</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+
+            <button type="submit" class="btn btn-primary">Disponibilidad</button>
         </form>
     </div>
 
@@ -76,13 +58,14 @@
 	  // para imprimir tag de la fecha el dia seleccionado
 	  const days = [ "lunes", "martes", "miercoles", "jueves", "viernes", "sabado","domingo"];
 	//  const days = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
-	  var diaSemanaNegrita= document.getElementById("dia"); 
+	  var diaSemanaNegrita= document.getElementById("diaText");
 	  function handler(e){
 		 // alert(e.target.value);
 		  const dateStr = e.target.value;
 		  const date = new Date(dateStr);
 		  let diaSemana = days[date.getDay()];
 	  	  diaSemanaNegrita.innerText = diaSemana;
+	  	  document.getElementById("dia").setAttribute("value", diaSemana);
 	  	  console.log(document.getElementById("Legajo").value);
 	      console.log(diaSemana);
 	  	  

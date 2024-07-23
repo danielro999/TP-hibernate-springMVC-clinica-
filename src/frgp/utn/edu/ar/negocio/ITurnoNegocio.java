@@ -10,6 +10,8 @@ public interface ITurnoNegocio {
 	    Turno readOne(int id);
 
 	    List<Turno> readAll();
+	    
+	    List<Turno> traerMedicosPorLegajo(int legajo);
 
 	    boolean update(Turno turno);
 
