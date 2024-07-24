@@ -160,7 +160,6 @@ public class TurnoController {
 	    		String dia
 	    		) {
 	        ModelAndView mav = new ModelAndView();
-	        
 	        ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
 	        MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
 	        PacienteNegocio pacienteNegocio = (PacienteNegocio) appContext.getBean("beanPacienteNegocio");
@@ -177,17 +176,7 @@ public class TurnoController {
 					listaHoras.add(Integer.valueOf(turno.getHora()));
 				}
 			}
-           
-	 /*       for (int i = 0; i < 14; i++) {
-				Turno turno = turnos.get(i);
-	        	if (turno.getFecha().equals(fecha) && turno.getHora().equals(Integer.toString(i+9))) {
-	        		listaFecha.add(false);
-	        	} 
-	        	else {
-	        		listaFecha.add(true);
-				}
-			}*/
-				        
+                  
 	        System.out.println(listaHoras);
 	        
 	        List<Boolean> horarios = new ArrayList<>();

@@ -19,5 +19,7 @@ import frgp.utn.edu.ar.entidad.Paciente;
 	    boolean update(Paciente paciente);
 
 	    boolean delete(Paciente paciente);
+	    
+	    public boolean exiteDNI(String dni);
 	}
 

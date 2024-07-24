@@ -14,4 +14,5 @@ public interface IPacienteNegocio {
     List<Paciente> readAllActive();
     boolean update(Paciente paciente);
     boolean delete(Paciente paciente);
+    public boolean exiteDNI(String dni);
 }

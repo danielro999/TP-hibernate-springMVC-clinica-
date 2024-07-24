@@ -9,14 +9,36 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+        function verificarDni() {
+            var dni = document.getElementById("dni").value;
+            if (dni) {
+            console.log(`/validarDni?dni=${dni}`);
+            	
+                fetch(`/validarDni?dni=`+dni)
+                    .then(response => response.json())
+                    .then(data => {
+                        var mensaje = document.getElementById("mensajeDni");
+                        if (data) {
+                            mensaje.textContent = "DNI ya registrado.";
+                            mensaje.style.color = "red";
+                        } else {
+                            mensaje.textContent = "DNI disponible.";
+                            mensaje.style.color = "green";
+                        }
+                    });
+            }
+        }
+    </script>
 </head>
 <body>
 	<%@ include file="encabezado.jsp"%>
 	<div class="container" style="width: 500px;">
 		<h2 class="mt-5">Formulario Alta de Paciente</h2>
 
-		<form action="altaPaciente.html" method="post">
+		<form id="altaPacienteForm" action="altaPaciente.html" method="post">
 
 			<div class="form-group">
 				<label for="nombre">Nombre</label> <input type="text"
@@ -27,9 +49,12 @@
 					class="form-control" id="apellido" name="apellido" required>
 			</div>
 			<div class="form-group">
-				<label for="dni">DNI</label> <input type="text" class="form-control"
-					id="dni" name="dni" required pattern="\d{7,8}">
+				<label for="dni">DNI:</label> <input type="text" id="dni" name="dni"
+					class="form-control" onblur="verificarDni()" required> <span id="mensajeDni"></span>
 			</div>
+			<c:if test="${not empty error}">
+				<div style="color: red;">${error}</div>
+			</c:if>
 			<div class="form-group">
 				<label for="telefono">Teléfono</label> <input type="text"
 					class="form-control" id="telefono" name="telefono" required
@@ -39,21 +64,21 @@
 				<label for="direccion">Dirección</label> <input type="text"
 					class="form-control" id="direccion" name="direccion" required>
 			</div>
-		    <div class="form-group">
-                <label for="provincia">Provincia</label>
-                <select class="form-control" id="provincia" name="provincia" required>
-                    <option value="">Seleccione una provincia</option>
-                    <option value="Buenos Aires">Buenos Aires</option>
-                    <option value="Cordoba">Córdoba</option>
-                    <option value="Santa Fe">Santa Fe</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="localidad">Localidad</label>
-                <select class="form-control" id="localidad" name="localidad" required>
-                    <option value="">Seleccione una localidad</option>
-                </select>
-            </div>	
+			<div class="form-group">
+				<label for="provincia">Provincia</label> <select
+					class="form-control" id="provincia" name="provincia" required>
+					<option value="">Seleccione una provincia</option>
+					<option value="Buenos Aires">Buenos Aires</option>
+					<option value="Cordoba">Córdoba</option>
+					<option value="Santa Fe">Santa Fe</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="localidad">Localidad</label> <select
+					class="form-control" id="localidad" name="localidad" required>
+					<option value="">Seleccione una localidad</option>
+				</select>
+			</div>
 			<div class="form-group">
 				<label for="fechaNacimiento">Fecha de Nacimiento</label> <input
 					type="date" class="form-control" id="fechaNacimiento"
@@ -80,32 +105,32 @@
 			<button type="submit" class="btn btn-primary">Dar de Alta</button>
 		</form>
 	</div>
-	  <!-- Mensaje de éxito -->
-    <div id="successMessage" class="alert alert-success" style="display:none;" role="alert">
-        El paciente fue cargado con éxito
-    </div>
+	<!-- Mensaje de éxito -->
+	<div id="successMessage" class="alert alert-success"
+		style="display: none;" role="alert">El paciente fue cargado con
+		éxito</div>
 
-    <!-- Modal de confirmación de alta -->
-    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Confirmación</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    El paciente fue cargado con éxito
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Modal de confirmación de alta -->
+	<div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+		aria-labelledby="successModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="successModalLabel">Confirmación</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">El paciente fue cargado con éxito</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script>
+ 	<script>
         $(document).ready(function(){
             // Localidades por provincia
             const localidadesPorProvincia = {
@@ -125,15 +150,15 @@
                 });
             });
 
-            // Mostrar mensaje de éxito al enviar el formulario
+          /*   // Mostrar mensaje de éxito al enviar el formulario
             $('#altaPacienteForm').submit(function(event){
                 event.preventDefault(); // Evita el envío real del formulario
                 $('#successModal').modal('show');
                 setTimeout(() => {
                     this.submit(); // Enviar el formulario después de mostrar el mensaje
                 }, 1000);
-            });
+            }); */
         });
-    </script>
+    </script> 
 </body>
 </html>

@@ -47,6 +47,10 @@ public class PacienteNegocio implements IPacienteNegocio {
     public boolean update(Paciente paciente) {
         return daoPaciente.update(paciente);
     }
+    
+    public boolean exiteDNI(String dni) {
+    	return daoPaciente.exiteDNI(dni);
+    };
 
     public boolean delete(Paciente paciente) {
         return daoPaciente.delete(paciente);

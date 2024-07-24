@@ -2,9 +2,11 @@ package frgp.utn.edu.ar.daoImp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoPaciente;
+import frgp.utn.edu.ar.entidad.Medico;
 import frgp.utn.edu.ar.entidad.Paciente;
 
 public class DaoPaciente implements IdaoPaciente {
@@ -145,6 +147,23 @@ public class DaoPaciente implements IdaoPaciente {
         List<Paciente> pacientes = session.createQuery("FROM Paciente where estado= 1").list();
         return pacientes;
     }
+    
+    public boolean exiteDNI(String dni) {
+        Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        String hql = "FROM Paciente WHERE dni = :dni";
+        Query query = session.createQuery(hql);
+        query.setParameter("dni", dni);
+
+        // Ejecutar la consulta y obtener el resultado único
+        Paciente pacienteConDni = (Paciente) query.uniqueResult();
+
+        //de profe
+        //Especialidad especialidad = (Especialidad) session.get(Especialidad.class, nombreEspecialidad);
+  
+        return pacienteConDni==null? false : true ;
+    }
+    
     // Agrego los getters y setters para Spring Core
 
     public Conexion getConexion() {
